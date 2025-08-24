@@ -1,85 +1,61 @@
 "use client"
 
 import { motion } from 'framer-motion'
-import Image from 'next/image'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Download, Mail } from 'lucide-react'
 
 const skills = [
-  { category: 'AI/ML', items: ['TensorFlow', 'PyTorch', 'Scikit-learn', 'OpenAI API', 'LangChain'] },
-  { category: 'Programming', items: ['Python', 'JavaScript', 'TypeScript', 'C++', 'Rust'] },
-  { category: 'Frameworks', items: ['Next.js', 'React', 'Node.js', 'FastAPI', 'Django'] },
-  { category: 'Tools', items: ['Docker', 'Kubernetes', 'AWS', 'Git', 'Jupyter'] },
+  { category: 'LLM & AI/ML', items: ['vLLM', 'OpenWebUI', 'LangChain', 'RAG', 'TensorFlow', 'Keras', 'PyTorch', 'Scikit-learn'] },
+  { category: 'Programming', items: ['Python', 'Java', 'SQL'] },
+  { category: 'Data & Analytics', items: ['Pandas', 'NumPy', 'SPSS', 'Tableau', 'Grafana', 'Matplotlib', 'Seaborn'] },
+  { category: 'Databases & Tools', items: ['PostgreSQL', 'MySQL', 'MongoDB', 'Qdrant', 'Docker', 'Git', 'Traefik'] },
 ]
 
 export function About() {
   return (
-    <section id="about" className="section-padding bg-muted/30">
+    <section id="about" className="section-padding bg-white/50">
       <div className="container">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Profile Image */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="relative"
-          >
-            <div className="relative w-full max-w-md mx-auto">
-              <div className="aspect-square rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 p-1">
-                <div className="aspect-square rounded-2xl bg-background overflow-hidden">
-                  <Image
-                    src="/placeholder-profile.jpg"
-                    alt="Your Name"
-                    fill
-                    className="object-cover"
-                    priority
-                  />
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
+        <div className="max-w-4xl mx-auto">
           {/* Content */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
             className="space-y-6"
           >
             <div>
-              <h2 className="text-3xl sm:text-4xl font-bold mb-4">About Me</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                I'm a passionate AI Engineer and researcher with expertise in machine learning, 
-                deep learning, and artificial intelligence. With a strong foundation in both 
-                theoretical and practical aspects of AI, I specialize in building intelligent 
-                systems that solve real-world problems.
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-[#111111]">About Me</h2>
+              <p className="text-lg text-[#6B6B6B] leading-relaxed">
+                I'm a passionate AI/ML Engineer and Graduate Research Assistant at Wichita State University 
+                with expertise in machine learning, data science, and AI-powered chatbot development. 
+                Currently pursuing my Master's in Business Analytics (Data Science Track) while working 
+                on cutting-edge AI research projects.
               </p>
             </div>
 
             <div>
-              <p className="text-muted-foreground leading-relaxed">
-                My work spans across various domains including natural language processing, 
-                computer vision, and reinforcement learning. I believe in the power of AI to 
-                transform industries and improve human lives through innovative solutions.
+              <p className="text-[#6B6B6B] leading-relaxed">
+                My experience spans developing AI chatbots using LLMs, predictive modeling, data analytics, 
+                and API integration. I'm passionate about leveraging AI to solve complex business problems 
+                and improve operational efficiency through innovative data-driven solutions.
               </p>
             </div>
 
             {/* Skills */}
             <div className="space-y-4">
-              <h3 className="text-xl font-semibold">Skills & Technologies</h3>
+              <h3 className="text-xl font-semibold text-[#111111]">Skills & Technologies</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {skills.map((skillGroup) => (
-                  <Card key={skillGroup.category}>
+                  <Card key={skillGroup.category} className="bg-white/80 backdrop-blur-sm border-white/70">
                     <CardContent className="p-4">
-                      <h4 className="font-medium mb-2 text-primary">{skillGroup.category}</h4>
+                      <h4 className="font-medium mb-2 text-[#FF8A3D]">{skillGroup.category}</h4>
                       <div className="flex flex-wrap gap-2">
                         {skillGroup.items.map((skill) => (
                           <span
                             key={skill}
-                            className="px-2 py-1 text-xs bg-secondary text-secondary-foreground rounded-md"
+                            className="px-3 py-1 text-xs bg-[#FF8A3D]/10 text-[#FF8A3D] rounded-full font-medium"
                           >
                             {skill}
                           </span>
@@ -93,11 +69,11 @@ export function About() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="group">
+              <Button size="lg" className="group bg-[#FF8A3D] hover:bg-[#FF8A3D]/90 text-white rounded-full px-6 py-3 shadow-lg">
                 <Download className="mr-2 h-5 w-5" />
                 Download Resume
               </Button>
-              <Button variant="outline" size="lg" className="group">
+              <Button variant="outline" size="lg" className="group border-[#FF8A3D] text-[#FF8A3D] hover:bg-[#FF8A3D] hover:text-white rounded-full px-6 py-3">
                 <Mail className="mr-2 h-5 w-5" />
                 Get In Touch
               </Button>

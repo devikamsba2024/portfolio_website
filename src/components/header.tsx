@@ -9,10 +9,11 @@ import { Button } from './ui/button'
 
 const navigation = [
   { name: 'Home', href: '#home' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Blog', href: '#blog' },
-  { name: 'Research', href: '#research' },
   { name: 'About', href: '#about' },
+  { name: 'Education', href: '#education' },
+  { name: 'Experience', href: '#experience' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Blogs', href: '#blogs' },
   { name: 'Contact', href: '#contact' },
 ]
 
@@ -20,11 +21,11 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b border-white/20 bg-gradient-to-r from-[#FFF7EC]/95 to-[#FFE1C6]/95 backdrop-blur supports-[backdrop-filter]:bg-gradient-to-r supports-[backdrop-filter]:from-[#FFF7EC]/80 supports-[backdrop-filter]:to-[#FFE1C6]/80">
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center">
           <Link href="/" className="flex items-center space-x-2">
-            <span className="text-xl font-bold gradient-text">Your Name</span>
+            <span className="text-xl font-bold gradient-text">Devika Nekkalapu</span>
           </Link>
         </div>
 
@@ -34,7 +35,7 @@ export function Header() {
             <Link
               key={item.name}
               href={item.href}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              className="text-sm font-medium text-[#6B6B6B] hover:text-[#FF8A3D] transition-colors"
             >
               {item.name}
             </Link>
@@ -66,14 +67,14 @@ export function Header() {
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
           exit={{ opacity: 0, height: 0 }}
-          className="md:hidden border-t bg-background"
+          className="md:hidden border-t border-white/20 bg-gradient-to-r from-[#FFF7EC] to-[#FFE1C6]"
         >
           <div className="container py-4 space-y-4">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="block text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                className="block text-sm font-medium text-[#6B6B6B] hover:text-[#FF8A3D] transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item.name}

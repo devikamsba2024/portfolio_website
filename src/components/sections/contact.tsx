@@ -46,25 +46,25 @@ export function Contact() {
     {
       icon: Mail,
       title: 'Email',
-      description: process.env.NEXT_PUBLIC_EMAIL || 'your.email@example.com',
-      href: `mailto:${process.env.NEXT_PUBLIC_EMAIL || 'your.email@example.com'}`,
+      description: 'dxnekkalapu@shockers.wichita.edu',
+      href: 'mailto:dxnekkalapu@shockers.wichita.edu',
     },
     {
       icon: Phone,
       title: 'Phone',
-      description: '+1 (555) 123-4567',
-      href: 'tel:+15551234567',
+      description: '(316) 226-4233',
+      href: 'tel:+13162264233',
     },
     {
       icon: MapPin,
       title: 'Location',
-      description: 'San Francisco, CA',
+      description: 'Wichita, KS',
       href: '#',
     },
   ]
 
   return (
-    <section id="contact" className="section-padding">
+    <section id="contact" className="section-padding bg-gradient-to-br from-[#FFF7EC] to-[#FFE1C6]">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -73,8 +73,8 @@ export function Contact() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Get In Touch</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-[#111111]">Get In Touch</h2>
+          <p className="text-lg text-[#6B6B6B] max-w-2xl mx-auto">
             I'm always interested in new opportunities and collaborations. 
             Feel free to reach out if you'd like to work together or just say hello!
           </p>
@@ -88,10 +88,10 @@ export function Contact() {
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <Card>
+            <Card className="bg-white/90 backdrop-blur-sm border-white/70">
               <CardHeader>
-                <CardTitle>Send a Message</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-[#111111]">Send a Message</CardTitle>
+                <CardDescription className="text-[#6B6B6B]">
                   Fill out the form below and I'll get back to you as soon as possible.
                 </CardDescription>
               </CardHeader>
@@ -119,7 +119,7 @@ export function Contact() {
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label htmlFor="name" className="block text-sm font-medium mb-2">
+                        <label htmlFor="name" className="block text-sm font-medium mb-2 text-[#111111]">
                           Name
                         </label>
                         <Input
@@ -133,7 +133,7 @@ export function Contact() {
                         />
                       </div>
                       <div>
-                        <label htmlFor="email" className="block text-sm font-medium mb-2">
+                        <label htmlFor="email" className="block text-sm font-medium mb-2 text-[#111111]">
                           Email
                         </label>
                         <Input
@@ -148,7 +148,7 @@ export function Contact() {
                       </div>
                     </div>
                     <div>
-                      <label htmlFor="subject" className="block text-sm font-medium mb-2">
+                      <label htmlFor="subject" className="block text-sm font-medium mb-2 text-[#111111]">
                         Subject
                       </label>
                       <Input
@@ -162,7 +162,7 @@ export function Contact() {
                       />
                     </div>
                     <div>
-                      <label htmlFor="message" className="block text-sm font-medium mb-2">
+                      <label htmlFor="message" className="block text-sm font-medium mb-2 text-[#111111]">
                         Message
                       </label>
                       <Textarea
@@ -178,7 +178,7 @@ export function Contact() {
                     <Button
                       type="submit"
                       size="lg"
-                      className="w-full"
+                      className="w-full bg-[#FF8A3D] hover:bg-[#FF8A3D]/90 text-white rounded-full"
                       disabled={isSubmitting}
                     >
                       {isSubmitting ? (
@@ -208,8 +208,8 @@ export function Contact() {
             className="space-y-6"
           >
             <div>
-              <h3 className="text-2xl font-bold mb-4">Contact Information</h3>
-              <p className="text-muted-foreground">
+              <h3 className="text-2xl font-bold mb-4 text-[#111111]">Contact Information</h3>
+              <p className="text-[#6B6B6B]">
                 I'm always open to discussing new projects, creative ideas, 
                 or opportunities to be part of your visions.
               </p>
@@ -224,17 +224,17 @@ export function Contact() {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
                 >
-                  <Card className="card-hover">
+                  <Card className="card-hover bg-white/80 backdrop-blur-sm border-white/50">
                     <CardContent className="p-4">
                       <div className="flex items-center space-x-4">
-                        <div className="p-2 bg-primary/10 rounded-lg">
-                          <info.icon className="h-5 w-5 text-primary" />
+                        <div className="p-2 bg-[#FF8A3D]/10 rounded-lg">
+                          <info.icon className="h-5 w-5 text-[#FF8A3D]" />
                         </div>
                         <div>
-                          <h4 className="font-medium">{info.title}</h4>
+                          <h4 className="font-medium text-[#111111]">{info.title}</h4>
                           <a
                             href={info.href}
-                            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                            className="text-sm text-[#6B6B6B] hover:text-[#FF8A3D] transition-colors"
                           >
                             {info.description}
                           </a>
@@ -247,12 +247,12 @@ export function Contact() {
             </div>
 
             <div className="pt-4">
-              <h4 className="font-medium mb-2">Available for:</h4>
+              <h4 className="font-medium mb-2 text-[#111111]">Available for:</h4>
               <div className="flex flex-wrap gap-2">
-                {['AI Consulting', 'Research Collaboration', 'Speaking Engagements', 'Open Source'].map((item) => (
+                {['AI/ML Consulting', 'Research Collaboration', 'Data Science Projects', 'Chatbot Development'].map((item) => (
                   <span
                     key={item}
-                    className="px-3 py-1 text-sm bg-secondary text-secondary-foreground rounded-full"
+                    className="px-3 py-1 text-sm bg-[#FF8A3D]/10 text-[#FF8A3D] rounded-full font-medium"
                   >
                     {item}
                   </span>

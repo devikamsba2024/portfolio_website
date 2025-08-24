@@ -49,7 +49,7 @@ const dummyBlogs = [
 
 export default function Blogs() {
   return (
-    <section id="blogs" className="section-padding bg-muted/30">
+    <section id="blogs" className="section-padding bg-white/50">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -58,8 +58,8 @@ export default function Blogs() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4">Latest Insights</h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <h2 className="text-4xl font-bold mb-4 text-[#111111]">Latest Insights</h2>
+          <p className="text-[#6B6B6B] text-lg max-w-2xl mx-auto">
             Thoughts, research, and insights on the latest developments in AI and autonomous systems.
           </p>
         </motion.div>
@@ -73,7 +73,7 @@ export default function Blogs() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
-              <Card className="h-full group hover:shadow-lg transition-all duration-300">
+              <Card className="h-full group hover:shadow-xl transition-all duration-300 bg-white/90 backdrop-blur-sm border-white/70">
                 <CardHeader className="p-0">
                   <div className="relative h-48 overflow-hidden rounded-t-lg">
                     <Image
@@ -86,20 +86,20 @@ export default function Blogs() {
                 </CardHeader>
                 <CardContent className="p-6">
                   <div className="flex items-center gap-2 mb-3">
-                    <Calendar className="w-4 h-4 text-muted-foreground" />
-                    <span className="text-sm text-muted-foreground">
+                    <Calendar className="w-4 h-4 text-[#6B6B6B]" />
+                    <span className="text-sm text-[#6B6B6B]">
                       {formatDate(blog.publishedDate)}
                     </span>
                   </div>
-                  <CardTitle className="text-xl mb-3 line-clamp-2">{blog.title}</CardTitle>
-                  <CardDescription className="text-muted-foreground mb-4 line-clamp-3">
+                  <CardTitle className="text-xl mb-3 line-clamp-2 text-[#111111]">{blog.title}</CardTitle>
+                  <CardDescription className="text-[#6B6B6B] mb-4 line-clamp-3">
                     {blog.excerpt}
                   </CardDescription>
                   <div className="flex flex-wrap gap-2 mb-4">
                     {blog.tags.slice(0, 3).map((tag) => (
                       <span
                         key={tag}
-                        className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-md"
+                        className="px-3 py-1 bg-[#FF8A3D]/10 text-[#FF8A3D] text-xs rounded-full font-medium"
                       >
                         {tag}
                       </span>
@@ -107,7 +107,7 @@ export default function Blogs() {
                   </div>
                 </CardContent>
                 <CardFooter className="p-6 pt-0">
-                  <Button asChild variant="ghost" className="w-full group">
+                  <Button asChild variant="ghost" className="w-full group text-[#FF8A3D] hover:bg-[#FF8A3D]/10 rounded-full">
                     <a href={`/blog/${blog.slug}`}>
                       Read More
                       <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -126,7 +126,7 @@ export default function Blogs() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-center mt-12"
         >
-          <Button asChild size="lg">
+          <Button asChild size="lg" className="bg-[#FF8A3D] hover:bg-[#FF8A3D]/90 text-white rounded-full px-8 py-3 shadow-lg">
             <a href="/blog">
               View All Posts
             </a>
