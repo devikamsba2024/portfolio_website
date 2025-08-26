@@ -1,15 +1,12 @@
-import { motion } from "framer-motion"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Calendar } from "lucide-react"
+import Link from "next/link"
 import { getBlogPosts } from "@/lib/contentful"
 
 export default async function BlogsServer() {
-  console.log('🎭 BlogsServer (SERVER COMPONENT) loading...')
-  
   // Fetch data on the server
   const blogs = await getBlogPosts()
-  console.log('🎯 BlogsServer - Server fetched:', blogs.length, 'posts')
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
@@ -27,13 +24,6 @@ export default async function BlogsServer() {
           <p className="text-[#6B6B6B] text-lg max-w-2xl mx-auto">
             Thoughts, research, and insights on AI/ML development, data science, and technology trends.
           </p>
-          {/* DEBUG INFO */}
-          <div className="mt-4 p-4 bg-purple-100 rounded-lg text-sm">
-            <p><strong>SERVER Component Debug Info:</strong></p>
-            <p>Blogs count: {blogs.length}</p>
-            {blogs.length > 0 && <p>First blog title: {blogs[0].title}</p>}
-            <p>This is fetched on the SERVER!</p>
-          </div>
         </div>
 
         {blogs.length > 0 ? (
@@ -72,10 +62,10 @@ export default async function BlogsServer() {
                     </CardContent>
                     <CardFooter className="p-6 pt-0">
                       <Button asChild variant="ghost" className="w-full group text-[#FF8A3D] hover:bg-[#FF8A3D]/10 rounded-full">
-                        <a href={`/blog/${blog.slug || 'blog-post'}`}>
+                        <Link href={`/blog/${blog.slug || 'blog-post'}`}>
                           Read More
                           <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                        </a>
+                        </Link>
                       </Button>
                     </CardFooter>
                   </Card>
