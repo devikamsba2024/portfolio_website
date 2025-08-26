@@ -2,8 +2,8 @@ import { Hero } from "@/components/sections/hero"
 import { About } from "@/components/sections/about"
 import Education from "@/components/sections/education"
 import Experience from "@/components/sections/experience"
-import Projects from "@/components/sections/projects"
-import Blogs from "@/components/sections/blogs"
+import ProjectsServer from "@/components/sections/projects-server"
+import BlogsServerSimple from "@/components/sections/blogs-server-simple"
 import { Contact } from "@/components/sections/contact"
 
 export default function Home() {
@@ -13,8 +13,8 @@ export default function Home() {
       <About />
       <Education />
       <Experience />
-      <Projects />
-      <Blogs />
+      <ProjectsServer />
+      <BlogsServerSimple />
       <Contact />
     </main>
   )

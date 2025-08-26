@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Download, Mail } from 'lucide-react'
+import Link from 'next/link'
 
 const skills = [
   { category: 'LLM & AI/ML', items: ['vLLM', 'OpenWebUI', 'LangChain', 'RAG', 'TensorFlow', 'Keras', 'PyTorch', 'Scikit-learn'] },
@@ -69,13 +70,17 @@ export function About() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="group bg-[#FF8A3D] hover:bg-[#FF8A3D]/90 text-white rounded-full px-6 py-3 shadow-lg">
-                <Download className="mr-2 h-5 w-5" />
-                Download Resume
+              <Button asChild size="lg" className="group bg-[#FF8A3D] hover:bg-[#FF8A3D]/90 text-white rounded-full px-6 py-3 shadow-lg">
+                <a href="/resume.pdf" download target="_blank" rel="noopener noreferrer">
+                  <Download className="mr-2 h-5 w-5" />
+                  Download Resume
+                </a>
               </Button>
-              <Button variant="outline" size="lg" className="group border-[#FF8A3D] text-[#FF8A3D] hover:bg-[#FF8A3D] hover:text-white rounded-full px-6 py-3">
-                <Mail className="mr-2 h-5 w-5" />
-                Get In Touch
+              <Button asChild variant="outline" size="lg" className="group border-[#FF8A3D] text-[#FF8A3D] hover:bg-[#FF8A3D] hover:text-white rounded-full px-6 py-3">
+                <Link href="#contact">
+                  <Mail className="mr-2 h-5 w-5" />
+                  Get In Touch
+                </Link>
               </Button>
             </div>
           </motion.div>

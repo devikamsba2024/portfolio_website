@@ -4,22 +4,17 @@ import { Github, Linkedin, Twitter, Mail } from 'lucide-react'
 const socialLinks = [
   {
     name: 'GitHub',
-    href: process.env.NEXT_PUBLIC_GITHUB_URL || '#',
+    href: 'https://github.com/devikamsba2024',
     icon: Github,
   },
   {
     name: 'LinkedIn',
-    href: process.env.NEXT_PUBLIC_LINKEDIN_URL || '#',
+    href: 'https://www.linkedin.com/in/ndevika',
     icon: Linkedin,
   },
   {
-    name: 'Twitter',
-    href: process.env.NEXT_PUBLIC_TWITTER_URL || '#',
-    icon: Twitter,
-  },
-  {
     name: 'Email',
-    href: `mailto:${process.env.NEXT_PUBLIC_EMAIL || 'your.email@example.com'}`,
+    href: 'mailto:devikanekkalapu7@gmail.com',
     icon: Mail,
   },
 ]
@@ -31,7 +26,7 @@ export function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <div className="flex items-center space-x-2">
             <span className="text-sm text-muted-foreground">
-              © 2024 Your Name. All rights reserved.
+              © 2024 Devika Nekkalapu. All rights reserved.
             </span>
           </div>
           

@@ -45,7 +45,13 @@ export function Contact() {
   const contactInfo = [
     {
       icon: Mail,
-      title: 'Email',
+      title: 'Primary Email',
+      description: 'devikanekkalapu7@gmail.com',
+      href: 'mailto:devikanekkalapu7@gmail.com',
+    },
+    {
+      icon: Mail,
+      title: 'Student Email',
       description: 'dxnekkalapu@shockers.wichita.edu',
       href: 'mailto:dxnekkalapu@shockers.wichita.edu',
     },

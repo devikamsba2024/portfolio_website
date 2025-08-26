@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { ArrowDown, Github, FileText } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export function Hero() {
   return (
@@ -90,21 +91,27 @@ export function Hero() {
               className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start"
             >
               <Button 
+                asChild
                 size="default" 
                 className="group bg-[#FF8A3D] hover:bg-[#FF8A3D]/90 text-white border-none rounded-full px-6 py-2 shadow-lg"
               >
-                <Github className="mr-2 h-4 w-4" />
-                View Projects
-                <ArrowDown className="ml-2 h-4 w-4 transition-transform group-hover:translate-y-1" />
+                <Link href="#projects">
+                  <Github className="mr-2 h-4 w-4" />
+                  View Projects
+                  <ArrowDown className="ml-2 h-4 w-4 transition-transform group-hover:translate-y-1" />
+                </Link>
               </Button>
               <Button 
+                asChild
                 variant="outline" 
                 size="default" 
                 className="group border-[#FF8A3D] text-[#FF8A3D] hover:bg-[#FF8A3D] hover:text-white rounded-full px-6 py-2"
               >
-                <FileText className="mr-2 h-4 w-4" />
-                Read Blogs
-                <ArrowDown className="ml-2 h-4 w-4 transition-transform group-hover:translate-y-1" />
+                <Link href="#blogs">
+                  <FileText className="mr-2 h-4 w-4" />
+                  Read Blogs
+                  <ArrowDown className="ml-2 h-4 w-4 transition-transform group-hover:translate-y-1" />
+                </Link>
               </Button>
             </motion.div>
           </div>
