@@ -13,10 +13,10 @@ const experiences = [
     period: "05/2025 to Current",
     type: "Research",
     responsibilities: [
-      "Spearheading the development of an AI-powered chatbot for NIAR and Wichita State University using open-source LLMs and tools",
-      "Integrated components such as OpenWebUI, vLLM, SearxNG, Tika, Playwright, and Traefik to support dynamic search, document parsing, and scalable LLM inference",
-      "Implemented observability with Grafana and data management using PostgreSQL and Qdrant for vector-based retrieval",
-      "Successfully deployed a functional chatbot prototype; currently focused on achieving high availability and production readiness"
+      "Spearheaded development of an AI-powered chatbot for NIAR and Wichita State University using open-source LLMs",
+      "Built a web-based interface, scalable inference pipeline, retrieval-augmented generation (RAG) modules, and a load-balanced deployment for seamless user interaction",
+      "Implemented monitoring dashboards and logging for observability, and integrated relational and vector databases to support retrieval-augmented responses",
+      "Deployed a functional prototype and currently advancing towards high availability, scalability, and production readiness"
     ]
   },
   {
@@ -24,10 +24,12 @@ const experiences = [
     title: "FREDS AI Task Force GRA",
     company: "Wichita State University",
     location: "Wichita, KS", 
-    period: "01/2025 to Current",
+    period: "01/2025 to 05/2025",
     type: "Research",
     responsibilities: [
-      "Working as a Research Assistant, focusing on integrating AI tools and technologies into the Finance, Real Estate, and Decision Sciences (FREDS) Department at the Barton School of Business, Wichita State University"
+      "Working as a Research Assistant, focusing on integrating AI tools and technologies into the Finance, Real Estate, and Decision Sciences (FREDS) Department at the Barton School of Business, Wichita State University",
+      "Researched and worked on the WSDM Cup 2025 'Multilingual Chatbot Arena' project, applying large language models to predict human-preferred responses",
+      "Fine-tuned multilingual models using QLoRA and low-rank adaptation techniques to enable efficient training on limited hardware"
     ]
   },
   {
