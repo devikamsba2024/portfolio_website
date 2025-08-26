@@ -17,7 +17,7 @@ export interface BlogPost {
   title: string
   slug?: string
   excerpt?: string
-  content: string
+  content: any // Rich text document from Contentful
   publishedDate?: string
   tags?: string[]
   featuredImage?: {
@@ -55,7 +55,7 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
       title: item.fields.title,
       slug: item.fields.slug || item.fields.title?.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '') || 'blog-post',
       excerpt: item.fields.excerpt || '',
-      content: item.fields.content || item.fields.body || '',
+      content: item.fields.content || item.fields.body || null,
       publishedDate: item.fields.publishedDate || undefined,
       tags: item.fields.tags || [],
       featuredImage: item.fields.featuredImage ? {
