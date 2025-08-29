@@ -43,6 +43,15 @@ export function Header() {
         </nav>
 
         <div className="flex items-center space-x-4">
+          <Button 
+            asChild
+            size="sm" 
+            className="hidden md:flex bg-[#FF8A3D] hover:bg-[#FF8A3D]/90 text-white border-none rounded-full px-4 py-2 shadow-md"
+          >
+            <Link href="/chat">
+              Talk to My AI
+            </Link>
+          </Button>
           <ThemeToggle />
           
           {/* Mobile menu button */}
@@ -80,6 +89,13 @@ export function Header() {
                 {item.name}
               </Link>
             ))}
+            <Link
+              href="/chat"
+              className="block text-sm font-medium text-[#FF8A3D] hover:text-[#FF8A3D]/80 transition-colors font-semibold"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Talk to My AI
+            </Link>
           </div>
         </motion.div>
       )}

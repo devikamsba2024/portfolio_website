@@ -107,9 +107,9 @@ export function Hero() {
                 size="default" 
                 className="group border-[#FF8A3D] text-[#FF8A3D] hover:bg-[#FF8A3D] hover:text-white rounded-full px-6 py-2"
               >
-                <Link href="#blogs">
+                <Link href="/chat">
                   <FileText className="mr-2 h-4 w-4" />
-                  Read Blogs
+                  Talk to My AI
                   <ArrowDown className="ml-2 h-4 w-4 transition-transform group-hover:translate-y-1" />
                 </Link>
               </Button>
