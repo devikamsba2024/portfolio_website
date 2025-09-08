@@ -93,8 +93,7 @@ export default async function ProjectsServer() {
                           asChild 
                           variant="outline" 
                           size="sm" 
-                          className="text-[#6B6B6B] hover:text-[#FF8A3D] rounded-full"
-                          onClick={(e) => e.stopPropagation()}
+                          className="text-[#6B6B6B] hover:text-[#FF8A3D] rounded-full relative z-10"
                         >
                           <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                             <Github className="w-4 h-4" />
