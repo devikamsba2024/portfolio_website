@@ -6,6 +6,9 @@ import ProjectsServer from "@/components/sections/projects-server"
 import BlogsServerSimple from "@/components/sections/blogs-server-simple"
 import { Contact } from "@/components/sections/contact"
 
+// Disable caching to always get fresh Contentful data
+export const revalidate = 0
+
 export default function Home() {
   return (
     <main>

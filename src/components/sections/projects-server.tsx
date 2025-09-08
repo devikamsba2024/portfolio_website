@@ -5,6 +5,24 @@ import Image from "next/image"
 import Link from "next/link"
 import { getProjects } from "@/lib/contentful"
 
+// Helper function to create a plain text excerpt from markdown
+function createExcerpt(markdown: string, maxLength: number = 150): string {
+  // Remove markdown syntax
+  const plainText = markdown
+    .replace(/#{1,6}\s+/g, '') // Remove headers
+    .replace(/\*\*([^*]+)\*\*/g, '$1') // Remove bold
+    .replace(/\*([^*]+)\*/g, '$1') // Remove italic
+    .replace(/`([^`]+)`/g, '$1') // Remove code
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // Remove links
+    .replace(/\|[^|\n]*\|/g, '') // Remove tables
+    .replace(/\n+/g, ' ') // Replace newlines with spaces
+    .trim()
+  
+  // Truncate to maxLength
+  if (plainText.length <= maxLength) return plainText
+  return plainText.substring(0, maxLength).trim() + '...'
+}
+
 // This is a Server Component, it fetches data directly on the server
 export default async function ProjectsServer() {
   console.log('🎭 ProjectsServer (SERVER COMPONENT) loading...')
@@ -29,7 +47,11 @@ export default async function ProjectsServer() {
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {displayProjects.slice(0, 6).map((project, index) => (
-                <div key={project.slug || index}>
+                <Link 
+                  key={project.slug || index}
+                  href={`/project/${project.slug || project.title.toLowerCase().replace(/\s+/g, '-')}`}
+                  className="block h-full"
+                >
                   <Card className="h-full group hover:shadow-xl transition-all duration-300 bg-white/90 backdrop-blur-sm border-white/70 cursor-pointer">
                     {project.featuredImage && (
                       <CardHeader className="p-0">
@@ -46,7 +68,7 @@ export default async function ProjectsServer() {
                     <CardContent className="p-6">
                       <CardTitle className="text-xl mb-3 line-clamp-2 text-[#111111]">{project.title}</CardTitle>
                       <CardDescription className="text-[#6B6B6B] mb-4 line-clamp-3">
-                        {project.description}
+                        {createExcerpt(project.description, 150)}
                       </CardDescription>
                       {project.techStack && project.techStack.length > 0 && (
                         <div className="flex flex-wrap gap-2 mb-4">
@@ -62,14 +84,18 @@ export default async function ProjectsServer() {
                       )}
                     </CardContent>
                     <CardFooter className="p-6 pt-0 flex gap-2">
-                      <Button asChild variant="ghost" className="flex-1 group text-[#FF8A3D] hover:bg-[#FF8A3D]/10 rounded-full">
-                        <Link href={`/project/${project.slug || project.title.toLowerCase().replace(/\s+/g, '-')}`}>
-                          View Details
-                          <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                        </Link>
-                      </Button>
+                      <div className="flex-1 text-center text-[#FF8A3D] font-medium group-hover:text-[#FF8A3D]/80 transition-colors">
+                        View Details
+                        <ArrowRight className="w-4 h-4 ml-2 inline group-hover:translate-x-1 transition-transform" />
+                      </div>
                       {project.githubUrl && (
-                        <Button asChild variant="outline" size="sm" className="text-[#6B6B6B] hover:text-[#FF8A3D] rounded-full">
+                        <Button 
+                          asChild 
+                          variant="outline" 
+                          size="sm" 
+                          className="text-[#6B6B6B] hover:text-[#FF8A3D] rounded-full"
+                          onClick={(e) => e.stopPropagation()}
+                        >
                           <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                             <Github className="w-4 h-4" />
                           </a>
@@ -77,7 +103,7 @@ export default async function ProjectsServer() {
                       )}
                     </CardFooter>
                   </Card>
-                </div>
+                </Link>
               ))}
             </div>
 
