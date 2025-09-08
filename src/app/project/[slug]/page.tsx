@@ -60,16 +60,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 View on GitHub
               </a>
             )}
-            {project.demoUrl && (
-              <a
-                href={project.demoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="border border-[#FF8A3D] text-[#FF8A3D] px-6 py-3 rounded-full hover:bg-[#FF8A3D]/10 transition-colors"
-              >
-                Live Demo
-              </a>
-            )}
           </div>
           
           <div className="mt-12 pt-8 border-t border-gray-200">
