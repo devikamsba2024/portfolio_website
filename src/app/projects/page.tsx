@@ -43,16 +43,6 @@ export default async function ProjectsPage() {
                     GitHub
                   </a>
                 )}
-                {project.demoUrl && (
-                  <a
-                    href={project.demoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[#6B6B6B] hover:text-[#FF8A3D]"
-                  >
-                    Demo
-                  </a>
-                )}
               </div>
             </div>
           ))}

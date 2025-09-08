@@ -1,5 +1,6 @@
 import { getProjects } from "@/lib/contentful"
 import Link from "next/link"
+import Image from "next/image"
 import { notFound } from "next/navigation"
 
 interface ProjectPageProps {

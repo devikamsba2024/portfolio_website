@@ -75,13 +75,6 @@ export default async function ProjectsServer() {
                           </a>
                         </Button>
                       )}
-                      {project.demoUrl && (
-                        <Button asChild variant="outline" size="sm" className="text-[#6B6B6B] hover:text-[#FF8A3D] rounded-full">
-                          <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
-                            <ExternalLink className="w-4 h-4" />
-                          </a>
-                        </Button>
-                      )}
                     </CardFooter>
                   </Card>
                 </div>

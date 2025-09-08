@@ -19,7 +19,7 @@ export default function ChatPage() {
     {
       id: '1',
       type: 'bot',
-      content: "Hi! I'm Devika's AI assistant. I can tell you about her background, skills, projects, and experiences. What would you like to know?",
+      content: "Hi! I'm Devika's AI assistant, powered by advanced language models. I can answer questions about her background, skills, projects, research, and professional experiences. I'm here to help you learn more about her expertise in AI/ML engineering. What would you like to know?",
       timestamp: new Date()
     }
   ])
@@ -49,8 +49,59 @@ export default function ChatPage() {
     setInputValue('')
     setIsLoading(true)
 
-    // Simulate AI response (you can replace this with actual API call)
-    setTimeout(() => {
+    try {
+      // Call your backend API
+      const response = await fetch('http://localhost:8000/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: 'gpt-3.5-turbo',
+          messages: [
+            {
+              role: 'system',
+              content: `You are Devika Nekkalapu's AI assistant. You help visitors learn about Devika's background, skills, and experience. 
+
+About Devika:
+- AI/ML Engineer and Graduate Research Assistant
+- Specializes in data science, machine learning, and intelligent system development
+- Expert in Python, TensorFlow, PyTorch, LLMs, NLP, computer vision
+- Experience building AI-powered solutions and chatbots
+- Strong background in data analytics and research
+- Currently pursuing advanced studies in AI/ML
+
+Be conversational, helpful, and focus on Devika's professional expertise. If asked about topics outside her portfolio, gently redirect to her AI/ML work and suggest contacting her directly for other inquiries.`
+            },
+            {
+              role: 'user',
+              content: inputValue
+            }
+          ],
+          temperature: 0.7,
+          max_tokens: 200
+        })
+      })
+
+      if (!response.ok) {
+        throw new Error(`API request failed: ${response.status}`)
+      }
+
+      const data = await response.json()
+      const aiResponse = data.choices[0]?.message?.content || "I'm sorry, I couldn't process that request. Please try again."
+
+      const botResponse: Message = {
+        id: (Date.now() + 1).toString(),
+        type: 'bot',
+        content: aiResponse,
+        timestamp: new Date()
+      }
+      
+      setMessages(prev => [...prev, botResponse])
+    } catch (error) {
+      console.error('Error calling API:', error)
+      
+      // Fallback to local responses if API fails
       const botResponse: Message = {
         id: (Date.now() + 1).toString(),
         type: 'bot',
@@ -58,8 +109,9 @@ export default function ChatPage() {
         timestamp: new Date()
       }
       setMessages(prev => [...prev, botResponse])
+    } finally {
       setIsLoading(false)
-    }, 1000 + Math.random() * 1000)
+    }
   }
 
   const generateBotResponse = (userInput: string): string => {
