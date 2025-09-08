@@ -66,14 +66,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 h1: ({children}) => <h1 className="text-3xl font-bold text-[#111111] mt-8 mb-4">{children}</h1>,
                 h2: ({children}) => <h2 className="text-2xl font-bold text-[#111111] mt-6 mb-3">{children}</h2>,
                 h3: ({children}) => <h3 className="text-xl font-semibold text-[#111111] mt-4 mb-2">{children}</h3>,
-                p: ({children, ...props}) => {
-                  // Check if this is a list item paragraph by examining the parent
-                  const isListItemParagraph = props.node?.parent?.type === 'listItem'
-                  if (isListItemParagraph) {
-                    return <span className="text-lg text-[#6B6B6B] leading-relaxed">{children}</span>
-                  }
-                  return <p className="text-lg text-[#6B6B6B] mb-4 leading-relaxed">{children}</p>
-                },
+                p: ({children}) => <p className="text-lg text-[#6B6B6B] mb-4 leading-relaxed">{children}</p>,
                 ul: ({children}) => <ul className="list-disc list-outside ml-6 mb-4 text-[#6B6B6B] [&_li]:mb-2">{children}</ul>,
                 ol: ({children}) => <ol className="list-decimal list-outside ml-6 mb-4 text-[#6B6B6B] [&_li]:mb-2">{children}</ol>,
                 li: ({children}) => <li className="text-lg text-[#6B6B6B] leading-relaxed">{children}</li>,
