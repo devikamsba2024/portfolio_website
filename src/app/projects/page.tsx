@@ -1,6 +1,24 @@
 import { getProjects } from "@/lib/contentful"
 import Link from "next/link"
 
+// Helper function to create a plain text excerpt from markdown
+function createExcerpt(markdown: string, maxLength: number = 200): string {
+  // Remove markdown syntax
+  const plainText = markdown
+    .replace(/#{1,6}\s+/g, '') // Remove headers
+    .replace(/\*\*([^*]+)\*\*/g, '$1') // Remove bold
+    .replace(/\*([^*]+)\*/g, '$1') // Remove italic
+    .replace(/`([^`]+)`/g, '$1') // Remove code
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // Remove links
+    .replace(/\|[^|\n]*\|/g, '') // Remove tables
+    .replace(/\n+/g, ' ') // Replace newlines with spaces
+    .trim()
+  
+  // Truncate to maxLength
+  if (plainText.length <= maxLength) return plainText
+  return plainText.substring(0, maxLength).trim() + '...'
+}
+
 export default async function ProjectsPage() {
   const projects = await getProjects()
 
@@ -13,7 +31,7 @@ export default async function ProjectsPage() {
           {projects.map((project) => (
             <div key={project.slug} className="bg-white rounded-lg shadow-lg p-6">
               <h2 className="text-xl font-bold text-[#111111] mb-3">{project.title}</h2>
-              <p className="text-[#6B6B6B] mb-4">{project.description}</p>
+              <p className="text-[#6B6B6B] mb-4">{createExcerpt(project.description, 150)}</p>
               {project.techStack && project.techStack.length > 0 && (
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.techStack.map((tech: string) => (
