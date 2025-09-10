@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Send, Bot, User, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
+import ReactMarkdown from 'react-markdown'
 
 interface Message {
   id: string
@@ -19,17 +20,23 @@ export default function ChatPage() {
     {
       id: '1',
       type: 'bot',
-      content: "Hi! I'm Devika's AI assistant, powered by advanced language models. I can answer questions about her background, skills, projects, research, and professional experiences. I'm here to help you learn more about her expertise in AI/ML engineering. What would you like to know?",
+      content: "Hi! I'm **Devika's AI assistant**, powered by advanced language models. I can answer questions about her:\n\n- Background and skills\n- Projects and research  \n- Professional experiences\n\n*What would you like to know?*",
       timestamp: new Date()
     }
   ])
   const [inputValue, setInputValue] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [isMounted, setIsMounted] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }
+
+  useEffect(() => {
+    setIsMounted(true)
+    scrollToBottom()
+  }, [])
 
   useEffect(() => {
     scrollToBottom()
@@ -51,11 +58,21 @@ export default function ChatPage() {
 
     try {
       // Call your backend API
-      const response = await fetch('http://localhost:8000/v1/chat/completions', {
+      const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000'
+      const chatEndpoint = process.env.NEXT_PUBLIC_CHAT_ENDPOINT || '/v1/chat/completions'
+      const apiKey = process.env.NEXT_PUBLIC_API_KEY
+      const headers: Record<string, string> = {
+        'Content-Type': 'application/json',
+      }
+      
+      // Add authorization header if API key is available
+      if (apiKey && apiKey !== 'your-openrouter-api-key-here') {
+        headers['Authorization'] = `Bearer ${apiKey}`
+      }
+
+      const response = await fetch(`${apiBaseUrl}${chatEndpoint}`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers,
         body: JSON.stringify({
           model: 'gpt-3.5-turbo',
           messages: [
@@ -206,7 +223,43 @@ Be conversational, helpful, and focus on Devika's professional expertise. If ask
                         ? 'bg-[#FF8A3D] text-white' 
                         : 'bg-gradient-to-br from-orange-50 to-orange-100 text-gray-800 border border-orange-200'
                     }`}>
-                      <p className="text-sm leading-relaxed">{message.content}</p>
+                      {message.type === 'bot' ? (
+                        <div className="text-sm leading-relaxed">
+                          {isMounted ? (
+                            <ReactMarkdown
+                              components={{
+                                h1: ({children}) => <h1 className="text-lg font-bold text-gray-900 mt-3 mb-2">{children}</h1>,
+                                h2: ({children}) => <h2 className="text-base font-bold text-gray-900 mt-2 mb-1">{children}</h2>,
+                                h3: ({children}) => <h3 className="text-sm font-semibold text-gray-900 mt-2 mb-1">{children}</h3>,
+                                p: ({children}) => <div className="text-sm text-gray-800 mb-2 leading-relaxed">{children}</div>,
+                                ul: ({children}) => <ul className="list-disc list-inside mb-2 text-gray-800 space-y-1">{children}</ul>,
+                                ol: ({children}) => <ol className="list-decimal list-inside mb-2 text-gray-800 space-y-1">{children}</ol>,
+                                li: ({children}) => <li className="text-sm text-gray-800">{children}</li>,
+                                strong: ({children}) => <strong className="font-bold text-gray-900">{children}</strong>,
+                                em: ({children}) => <em className="italic text-gray-700">{children}</em>,
+                                code: ({children}) => <code className="bg-orange-200 px-1 py-0.5 rounded text-xs font-mono text-orange-800">{children}</code>,
+                                pre: ({children}) => <pre className="bg-orange-100 p-3 rounded text-xs font-mono text-orange-900 overflow-x-auto mb-2">{children}</pre>,
+                                table: ({children}) => <table className="w-full border-collapse border border-gray-300 mb-3 text-xs">{children}</table>,
+                                thead: ({children}) => <thead className="bg-orange-50">{children}</thead>,
+                                tbody: ({children}) => <tbody>{children}</tbody>,
+                                tr: ({children}) => <tr className="border-b border-gray-200">{children}</tr>,
+                                th: ({children}) => <th className="border border-gray-300 px-2 py-1 text-left font-semibold text-gray-900">{children}</th>,
+                                td: ({children}) => <td className="border border-gray-300 px-2 py-1 text-gray-800">{children}</td>,
+                                blockquote: ({children}) => <blockquote className="border-l-2 border-orange-300 pl-2 ml-2 italic text-gray-700 mb-2">{children}</blockquote>,
+                                a: ({children, href}) => <a href={href} className="text-orange-600 hover:text-orange-700 underline" target="_blank" rel="noopener noreferrer">{children}</a>,
+                              }}
+                            >
+                              {message.content}
+                            </ReactMarkdown>
+                          ) : (
+                            <div className="text-sm text-gray-800 leading-relaxed whitespace-pre-line">
+                              {message.content}
+                            </div>
+                          )}
+                        </div>
+                      ) : (
+                        <p className="text-sm leading-relaxed">{message.content}</p>
+                      )}
                       <p className={`text-xs mt-2 ${
                         message.type === 'user' ? 'text-orange-100' : 'text-gray-500'
                       }`}>
