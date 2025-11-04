@@ -3,7 +3,7 @@ import { About } from "@/components/sections/about"
 import Education from "@/components/sections/education"
 import Experience from "@/components/sections/experience"
 import ProjectsServer from "@/components/sections/projects-server"
-import BlogsServerSimple from "@/components/sections/blogs-server-simple"
+import BlogsMedium from "@/components/sections/blogs-medium"
 import { Contact } from "@/components/sections/contact"
 
 // Disable caching to always get fresh Contentful data
@@ -17,7 +17,7 @@ export default function Home() {
       <Education />
       <Experience />
       <ProjectsServer />
-      <BlogsServerSimple />
+      <BlogsMedium username={process.env.NEXT_PUBLIC_MEDIUM_USERNAME} />
       <Contact />
     </main>
   )

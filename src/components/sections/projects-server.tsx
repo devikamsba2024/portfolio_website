@@ -7,15 +7,28 @@ import { getProjects } from "@/lib/contentful"
 
 // Helper function to create a plain text excerpt from markdown
 function createExcerpt(markdown: string, maxLength: number = 150): string {
-  // Remove markdown syntax
+  if (!markdown) return ''
+  
+  // Remove markdown syntax comprehensively
   const plainText = markdown
     .replace(/#{1,6}\s+/g, '') // Remove headers
+    .replace(/\*\*\*([^*]+)\*\*\*/g, '$1') // Remove bold+italic
     .replace(/\*\*([^*]+)\*\*/g, '$1') // Remove bold
     .replace(/\*([^*]+)\*/g, '$1') // Remove italic
-    .replace(/`([^`]+)`/g, '$1') // Remove code
+    .replace(/__([^_]+)__/g, '$1') // Remove bold (underscore)
+    .replace(/_([^_]+)_/g, '$1') // Remove italic (underscore)
+    .replace(/~~([^~]+)~~/g, '$1') // Remove strikethrough
+    .replace(/`{3}[\s\S]*?`{3}/g, '') // Remove code blocks
+    .replace(/`([^`]+)`/g, '$1') // Remove inline code
     .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // Remove links
+    .replace(/!\[([^\]]*)\]\([^)]+\)/g, '') // Remove images
     .replace(/\|[^|\n]*\|/g, '') // Remove tables
+    .replace(/^[\s]*[-*+]\s+/gm, '') // Remove list bullets
+    .replace(/^[\s]*\d+\.\s+/gm, '') // Remove numbered lists
+    .replace(/^[\s]*>\s+/gm, '') // Remove blockquotes
+    .replace(/---+/g, '') // Remove horizontal rules
     .replace(/\n+/g, ' ') // Replace newlines with spaces
+    .replace(/\s+/g, ' ') // Replace multiple spaces with single space
     .trim()
   
   // Truncate to maxLength
