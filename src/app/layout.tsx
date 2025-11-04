@@ -9,22 +9,22 @@ const inter = Inter({ subsets: ['latin'] })
 const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'AI Engineer Portfolio',
+  title: 'Devika Portfolio',
   description: 'Modern AI Engineer portfolio showcasing projects in autonomous systems, machine learning, and artificial intelligence.',
   keywords: ['AI Engineer', 'Machine Learning', 'Autonomous Systems', 'Artificial Intelligence', 'Portfolio'],
-  authors: [{ name: 'Your Name' }],
-  creator: 'Your Name',
-  publisher: 'Your Name',
+  authors: [{ name: 'Devika' }],
+  creator: 'Devika',
+  publisher: 'Devika',
   openGraph: {
-    title: 'AI Engineer Portfolio',
+    title: 'Devika Portfolio',
     description: 'Modern AI Engineer portfolio showcasing projects in autonomous systems, machine learning, and artificial intelligence.',
-    siteName: 'AI Engineer Portfolio',
+    siteName: 'Devika Portfolio',
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Engineer Portfolio',
+    title: 'Devika Portfolio',
     description: 'Modern AI Engineer portfolio showcasing projects in autonomous systems, machine learning, and artificial intelligence.',
   },
   robots: {
