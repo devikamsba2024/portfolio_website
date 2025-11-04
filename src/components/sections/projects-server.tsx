@@ -47,12 +47,10 @@ export default async function ProjectsServer() {
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {displayProjects.slice(0, 6).map((project, index) => (
-                <Link 
+                <Card 
                   key={project.slug || index}
-                  href={`/project/${project.slug || project.title.toLowerCase().replace(/\s+/g, '-')}`}
-                  className="block h-full"
+                  className="h-full group hover:shadow-xl transition-all duration-300 bg-white/90 backdrop-blur-sm border-white/70"
                 >
-                  <Card className="h-full group hover:shadow-xl transition-all duration-300 bg-white/90 backdrop-blur-sm border-white/70 cursor-pointer">
                     {project.featuredImage && (
                       <CardHeader className="p-0">
                         <div className="relative h-48 overflow-hidden rounded-t-lg">
@@ -84,16 +82,22 @@ export default async function ProjectsServer() {
                       )}
                     </CardContent>
                     <CardFooter className="p-6 pt-0 flex gap-2">
-                      <div className="flex-1 text-center text-gray-600 font-medium group-hover:text-gray-800 transition-colors">
-                        View Details
-                        <ArrowRight className="w-4 h-4 ml-2 inline group-hover:translate-x-1 transition-transform" />
-                      </div>
+                      <Button 
+                        asChild 
+                        variant="ghost" 
+                        className="flex-1 text-gray-600 hover:text-gray-800"
+                      >
+                        <Link href={`/project/${project.slug || project.title.toLowerCase().replace(/\s+/g, '-')}`}>
+                          View Details
+                          <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                      </Button>
                       {project.githubUrl && (
                         <Button 
                           asChild 
                           variant="outline" 
                           size="sm" 
-                          className="text-gray-600 hover:text-gray-800 rounded-full relative z-10"
+                          className="text-gray-600 hover:text-gray-800 rounded-full"
                         >
                           <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                             <Github className="w-4 h-4" />
@@ -102,7 +106,6 @@ export default async function ProjectsServer() {
                       )}
                     </CardFooter>
                   </Card>
-                </Link>
               ))}
             </div>
 
