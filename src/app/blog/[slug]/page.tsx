@@ -27,7 +27,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#FFF7EC] to-[#FFE1C6] py-20">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-20">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="bg-white rounded-lg shadow-lg p-8">
           <div className="mb-6">

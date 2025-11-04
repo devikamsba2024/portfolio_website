@@ -57,11 +57,11 @@ export default function Education() {
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <CardTitle className="text-xl mb-2 text-[#111111] flex items-center gap-2">
-                        <GraduationCap className="h-5 w-5 text-[#FF8A3D]" />
+                        <GraduationCap className="h-5 w-5 text-gray-600" />
                         {edu.degree}
                       </CardTitle>
                       {edu.track && (
-                        <CardDescription className="text-[#FF8A3D] font-medium text-base mb-2">
+                        <CardDescription className="text-gray-600 font-medium text-base mb-2">
                           {edu.track}
                         </CardDescription>
                       )}
@@ -81,15 +81,15 @@ export default function Education() {
                 <CardContent className="pt-0">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                     <div className="flex items-center gap-2 text-[#6B6B6B]">
-                      <Calendar className="h-4 w-4 text-[#FF8A3D]" />
+                      <Calendar className="h-4 w-4 text-gray-600" />
                       <span>{edu.period}</span>
                     </div>
                     <div className="flex items-center gap-2 text-[#6B6B6B]">
-                      <MapPin className="h-4 w-4 text-[#FF8A3D]" />
+                      <MapPin className="h-4 w-4 text-gray-600" />
                       <span>{edu.location}</span>
                     </div>
                     <div className="flex items-center gap-2 text-[#6B6B6B]">
-                      <Award className="h-4 w-4 text-[#FF8A3D]" />
+                      <Award className="h-4 w-4 text-gray-600" />
                       <span className="font-semibold text-[#111111]">{edu.gpa}</span>
                     </div>
                   </div>

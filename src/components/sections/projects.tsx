@@ -48,7 +48,7 @@ const dummyProjects = [
 
 export default function Projects() {
   return (
-    <section id="projects" className="section-padding bg-gradient-to-br from-[#FFF7EC] to-[#FFE1C6]">
+    <section id="projects" className="section-padding bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -92,7 +92,7 @@ export default function Projects() {
                     {project.techStack.map((tech) => (
                       <span
                         key={tech}
-                        className="px-3 py-1 bg-[#FF8A3D]/10 text-[#FF8A3D] text-xs rounded-full font-medium"
+                        className="px-3 py-1 bg-gray-600/10 text-gray-600 text-xs rounded-full font-medium"
                       >
                         {tech}
                       </span>
@@ -101,13 +101,13 @@ export default function Projects() {
                 </CardContent>
                 <CardFooter className="p-6 pt-0">
                   <div className="flex gap-2 w-full">
-                    <Button asChild variant="outline" className="flex-1 border-[#FF8A3D] text-[#FF8A3D] hover:bg-[#FF8A3D] hover:text-white rounded-full">
+                    <Button asChild variant="outline" className="flex-1 border-gray-600 text-gray-600 hover:bg-gray-600 hover:text-white rounded-full">
                       <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                         <Github className="w-4 h-4 mr-2" />
                         Code
                       </a>
                     </Button>
-                    <Button asChild className="flex-1 bg-[#FF8A3D] hover:bg-[#FF8A3D]/90 text-white rounded-full">
+                    <Button asChild className="flex-1 bg-gray-600 hover:bg-gray-600/90 text-white rounded-full">
                       <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
                         <ExternalLink className="w-4 h-4 mr-2" />
                         Demo
@@ -127,7 +127,7 @@ export default function Projects() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-center mt-12"
         >
-          <Button asChild size="lg" className="bg-[#FF8A3D] hover:bg-[#FF8A3D]/90 text-white rounded-full px-8 py-3 shadow-lg">
+          <Button asChild size="lg" className="bg-gray-600 hover:bg-gray-600/90 text-white rounded-full px-8 py-3 shadow-lg">
             <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">
               View All Projects
             </a>

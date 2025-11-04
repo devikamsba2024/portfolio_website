@@ -62,7 +62,7 @@ export default function BlogsNew() {
             Thoughts, research, and insights on AI/ML development, data science, and technology trends.
           </p>
           {loading && (
-            <p className="text-[#FF8A3D] mt-2">Loading content from Contentful...</p>
+            <p className="text-gray-600 mt-2">Loading content from Contentful...</p>
           )}
           {/* DEBUG INFO */}
           <div className="mt-4 p-4 bg-green-100 rounded-lg text-sm">
@@ -118,7 +118,7 @@ export default function BlogsNew() {
                           {blog.tags.slice(0, 3).map((tag: string) => (
                             <span
                               key={tag}
-                              className="px-3 py-1 bg-[#FF8A3D]/10 text-[#FF8A3D] text-xs rounded-full font-medium"
+                              className="px-3 py-1 bg-gray-600/10 text-gray-600 text-xs rounded-full font-medium"
                             >
                               {tag}
                             </span>
@@ -127,7 +127,7 @@ export default function BlogsNew() {
                       )}
                     </CardContent>
                     <CardFooter className="p-6 pt-0">
-                      <Button asChild variant="ghost" className="w-full group text-[#FF8A3D] hover:bg-[#FF8A3D]/10 rounded-full">
+                      <Button asChild variant="ghost" className="w-full group text-gray-600 hover:bg-gray-600/10 rounded-full">
                         <a href={`/blog/${blog.slug || 'blog-post'}`}>
                           Read More
                           <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -146,7 +146,7 @@ export default function BlogsNew() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-center mt-12"
             >
-              <Button asChild size="lg" className="bg-[#FF8A3D] hover:bg-[#FF8A3D]/90 text-white rounded-full px-8 py-3 shadow-lg">
+              <Button asChild size="lg" className="bg-gray-600 hover:bg-gray-600/90 text-white rounded-full px-8 py-3 shadow-lg">
                 <a href="/blog">
                   View All Posts
                 </a>

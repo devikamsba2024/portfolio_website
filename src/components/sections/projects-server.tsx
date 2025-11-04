@@ -75,7 +75,7 @@ export default async function ProjectsServer() {
                           {project.techStack.slice(0, 4).map((tech: string) => (
                             <span
                               key={tech}
-                              className="px-3 py-1 bg-[#FF8A3D]/10 text-[#FF8A3D] text-xs rounded-full font-medium"
+                              className="px-3 py-1 bg-gray-600/10 text-gray-600 text-xs rounded-full font-medium"
                             >
                               {tech}
                             </span>
@@ -84,7 +84,7 @@ export default async function ProjectsServer() {
                       )}
                     </CardContent>
                     <CardFooter className="p-6 pt-0 flex gap-2">
-                      <div className="flex-1 text-center text-[#FF8A3D] font-medium group-hover:text-[#FF8A3D]/80 transition-colors">
+                      <div className="flex-1 text-center text-gray-600 font-medium group-hover:text-gray-800 transition-colors">
                         View Details
                         <ArrowRight className="w-4 h-4 ml-2 inline group-hover:translate-x-1 transition-transform" />
                       </div>
@@ -93,7 +93,7 @@ export default async function ProjectsServer() {
                           asChild 
                           variant="outline" 
                           size="sm" 
-                          className="text-[#6B6B6B] hover:text-[#FF8A3D] rounded-full relative z-10"
+                          className="text-gray-600 hover:text-gray-800 rounded-full relative z-10"
                         >
                           <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                             <Github className="w-4 h-4" />
@@ -107,7 +107,7 @@ export default async function ProjectsServer() {
             </div>
 
             <div className="text-center mt-12">
-              <Button asChild size="lg" className="bg-[#FF8A3D] hover:bg-[#FF8A3D]/90 text-white rounded-full px-8 py-3 shadow-lg">
+              <Button asChild size="lg" className="bg-gray-600 hover:bg-gray-600/90 text-white rounded-full px-8 py-3 shadow-lg">
                 <Link href="/projects">
                   View All Projects
                 </Link>

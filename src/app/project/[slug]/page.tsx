@@ -19,13 +19,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#FFF7EC] to-[#FFE1C6] py-20">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-20">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="bg-white rounded-lg shadow-lg p-8">
           <div className="mb-6">
             <Link 
               href="/projects"
-              className="text-[#FF8A3D] hover:underline mb-4 inline-block"
+              className="text-gray-600 hover:underline mb-4 inline-block"
             >
               ← Back to All Projects
             </Link>
@@ -38,7 +38,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               {project.techStack.map((tech: string) => (
                 <span
                   key={tech}
-                  className="px-3 py-1 bg-[#FF8A3D]/10 text-[#FF8A3D] text-sm rounded-full font-medium"
+                  className="px-3 py-1 bg-gray-600/10 text-gray-600 text-sm rounded-full font-medium"
                 >
                   {tech}
                 </span>
@@ -69,7 +69,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 ol: ({children}) => <ol className="list-decimal list-outside ml-6 mb-4 text-[#6B6B6B]">{children}</ol>,
                 li: ({children}) => <li className="mb-2 text-lg text-[#6B6B6B] leading-relaxed">{children}</li>,
                 strong: ({children}) => <strong className="font-semibold text-[#111111]">{children}</strong>,
-                code: ({children}) => <code className="bg-gray-100 px-2 py-1 rounded text-sm font-mono text-[#FF8A3D]">{children}</code>,
+                code: ({children}) => <code className="bg-gray-100 px-2 py-1 rounded text-sm font-mono text-gray-600">{children}</code>,
               }}
             >
               {project.description}
@@ -82,7 +82,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[#FF8A3D] text-white px-6 py-3 rounded-full hover:bg-[#FF8A3D]/90 transition-colors"
+                className="bg-gray-600 text-white px-6 py-3 rounded-full hover:bg-gray-600/90 transition-colors"
               >
                 View on GitHub
               </a>
@@ -93,13 +93,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <div className="flex justify-between">
               <Link 
                 href="/projects"
-                className="text-[#FF8A3D] hover:underline"
+                className="text-gray-600 hover:underline"
               >
                 ← All Projects
               </Link>
               <Link 
                 href="/"
-                className="text-[#FF8A3D] hover:underline"
+                className="text-gray-600 hover:underline"
               >
                 Home →
               </Link>

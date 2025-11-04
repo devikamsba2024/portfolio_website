@@ -51,12 +51,12 @@ export function About() {
                 {skills.map((skillGroup) => (
                   <Card key={skillGroup.category} className="bg-white/80 backdrop-blur-sm border-white/70">
                     <CardContent className="p-4">
-                      <h4 className="font-medium mb-2 text-[#FF8A3D]">{skillGroup.category}</h4>
+                      <h4 className="font-medium mb-2 text-gray-600">{skillGroup.category}</h4>
                       <div className="flex flex-wrap gap-2">
                         {skillGroup.items.map((skill) => (
                           <span
                             key={skill}
-                            className="px-3 py-1 text-xs bg-[#FF8A3D]/10 text-[#FF8A3D] rounded-full font-medium"
+                            className="px-3 py-1 text-xs bg-gray-600/10 text-gray-600 rounded-full font-medium"
                           >
                             {skill}
                           </span>
@@ -70,13 +70,13 @@ export function About() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button asChild size="lg" className="group bg-[#FF8A3D] hover:bg-[#FF8A3D]/90 text-white rounded-full px-6 py-3 shadow-lg">
+              <Button asChild size="lg" className="group bg-gray-600 hover:bg-gray-600/90 text-white rounded-full px-6 py-3 shadow-lg">
                 <a href="/resume.pdf" download target="_blank" rel="noopener noreferrer">
                   <Download className="mr-2 h-5 w-5" />
                   Download Resume
                 </a>
               </Button>
-              <Button asChild variant="outline" size="lg" className="group border-[#FF8A3D] text-[#FF8A3D] hover:bg-[#FF8A3D] hover:text-white rounded-full px-6 py-3">
+              <Button asChild variant="outline" size="lg" className="group border-gray-600 text-gray-600 hover:bg-gray-600 hover:text-white rounded-full px-6 py-3">
                 <Link href="#contact">
                   <Mail className="mr-2 h-5 w-5" />
                   Get In Touch

@@ -70,7 +70,7 @@ export function Contact() {
   ]
 
   return (
-    <section id="contact" className="section-padding bg-gradient-to-br from-[#FFF7EC] to-[#FFE1C6]">
+    <section id="contact" className="section-padding bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -184,7 +184,7 @@ export function Contact() {
                     <Button
                       type="submit"
                       size="lg"
-                      className="w-full bg-[#FF8A3D] hover:bg-[#FF8A3D]/90 text-white rounded-full"
+                      className="w-full bg-gray-600 hover:bg-gray-600/90 text-white rounded-full"
                       disabled={isSubmitting}
                     >
                       {isSubmitting ? (
@@ -233,14 +233,14 @@ export function Contact() {
                   <Card className="card-hover bg-white/80 backdrop-blur-sm border-white/50">
                     <CardContent className="p-4">
                       <div className="flex items-center space-x-4">
-                        <div className="p-2 bg-[#FF8A3D]/10 rounded-lg">
-                          <info.icon className="h-5 w-5 text-[#FF8A3D]" />
+                        <div className="p-2 bg-gray-600/10 rounded-lg">
+                          <info.icon className="h-5 w-5 text-gray-600" />
                         </div>
                         <div>
                           <h4 className="font-medium text-[#111111]">{info.title}</h4>
                           <a
                             href={info.href}
-                            className="text-sm text-[#6B6B6B] hover:text-[#FF8A3D] transition-colors"
+                            className="text-sm text-gray-600 hover:text-gray-800 transition-colors"
                           >
                             {info.description}
                           </a>
@@ -258,7 +258,7 @@ export function Contact() {
                 {['AI/ML Consulting', 'Research Collaboration', 'Data Science Projects', 'Chatbot Development'].map((item) => (
                   <span
                     key={item}
-                    className="px-3 py-1 text-sm bg-[#FF8A3D]/10 text-[#FF8A3D] rounded-full font-medium"
+                    className="px-3 py-1 text-sm bg-gray-600/10 text-gray-600 rounded-full font-medium"
                   >
                     {item}
                   </span>

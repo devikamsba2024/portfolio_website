@@ -23,7 +23,7 @@ export default async function ProjectsPage() {
   const projects = await getProjects()
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#FFF7EC] to-[#FFE1C6] py-20">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-20">
       <div className="container mx-auto px-4">
         <h1 className="text-4xl font-bold text-[#111111] text-center mb-8">All Projects</h1>
         
@@ -37,7 +37,7 @@ export default async function ProjectsPage() {
                   {project.techStack.map((tech: string) => (
                     <span
                       key={tech}
-                      className="px-2 py-1 bg-[#FF8A3D]/10 text-[#FF8A3D] text-xs rounded-full"
+                      className="px-2 py-1 bg-gray-600/10 text-gray-600 text-xs rounded-full"
                     >
                       {tech}
                     </span>
@@ -47,7 +47,7 @@ export default async function ProjectsPage() {
               <div className="flex gap-2">
                 <Link 
                   href={`/project/${project.slug}`}
-                  className="text-[#FF8A3D] hover:underline"
+                  className="text-gray-600 hover:underline"
                 >
                   View Details →
                 </Link>

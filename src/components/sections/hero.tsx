@@ -8,7 +8,7 @@ import Link from 'next/link'
 
 export function Hero() {
   return (
-    <section id="home" className="relative overflow-hidden py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-[#FFF7EC] to-[#FFE1C6]">
+    <section id="home" className="relative overflow-hidden py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-gray-50 to-gray-100">
       {/* Subtle overlay for depth */}
       <div className="absolute inset-0 bg-white/10" />
       
@@ -35,7 +35,7 @@ export function Hero() {
                 className="rounded-full object-cover border-4 border-white shadow-xl"
                 priority
               />
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-orange-200/20 to-orange-300/20" />
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-gray-200/20 to-gray-300/20" />
             </div>
           </motion.div>
 
@@ -93,7 +93,7 @@ export function Hero() {
               <Button 
                 asChild
                 size="default" 
-                className="group bg-[#FF8A3D] hover:bg-[#FF8A3D]/90 text-white border-none rounded-full px-6 py-2 shadow-lg"
+                className="group bg-gray-600 hover:bg-gray-600/90 text-white border-none rounded-full px-6 py-2 shadow-lg"
               >
                 <Link href="#projects">
                   <Github className="mr-2 h-4 w-4" />
@@ -105,7 +105,7 @@ export function Hero() {
                 asChild
                 variant="outline" 
                 size="default" 
-                className="group border-[#FF8A3D] text-[#FF8A3D] hover:bg-[#FF8A3D] hover:text-white rounded-full px-6 py-2"
+                className="group border-gray-600 text-gray-600 hover:bg-gray-600 hover:text-white rounded-full px-6 py-2"
               >
                 <Link href="/chat">
                   <FileText className="mr-2 h-4 w-4" />

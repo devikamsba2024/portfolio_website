@@ -59,7 +59,7 @@ export default function ProjectsContentful() {
             A showcase of my work in AI/ML, data science, and software development.
           </p>
           {loading && (
-            <p className="text-[#FF8A3D] mt-2">Loading projects from Contentful...</p>
+            <p className="text-gray-600 mt-2">Loading projects from Contentful...</p>
           )}
         </motion.div>
 
@@ -97,7 +97,7 @@ export default function ProjectsContentful() {
                           {project.techStack.slice(0, 4).map((tech: string) => (
                             <span
                               key={tech}
-                              className="px-3 py-1 bg-[#FF8A3D]/10 text-[#FF8A3D] text-xs rounded-full font-medium"
+                              className="px-3 py-1 bg-gray-600/10 text-gray-600 text-xs rounded-full font-medium"
                             >
                               {tech}
                             </span>
@@ -106,14 +106,14 @@ export default function ProjectsContentful() {
                       )}
                     </CardContent>
                     <CardFooter className="p-6 pt-0 flex gap-2">
-                      <Button asChild variant="ghost" className="flex-1 group text-[#FF8A3D] hover:bg-[#FF8A3D]/10 rounded-full">
+                      <Button asChild variant="ghost" className="flex-1 group text-gray-600 hover:bg-gray-600/10 rounded-full">
                         <a href={`/project/${project.slug || project.title.toLowerCase().replace(/\s+/g, '-')}`}>
                           View Details
                           <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                         </a>
                       </Button>
                       {project.githubUrl && (
-                        <Button asChild variant="outline" size="sm" className="text-[#6B6B6B] hover:text-[#FF8A3D] rounded-full">
+                        <Button asChild variant="outline" size="sm" className="text-gray-600 hover:text-gray-800 rounded-full">
                           <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                             <Github className="w-4 h-4" />
                           </a>
@@ -132,7 +132,7 @@ export default function ProjectsContentful() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-center mt-12"
             >
-              <Button asChild size="lg" className="bg-[#FF8A3D] hover:bg-[#FF8A3D]/90 text-white rounded-full px-8 py-3 shadow-lg">
+              <Button asChild size="lg" className="bg-gray-600 hover:bg-gray-600/90 text-white rounded-full px-8 py-3 shadow-lg">
                 <a href="/projects">
                   View All Projects
                 </a>

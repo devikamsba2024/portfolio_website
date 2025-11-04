@@ -5,7 +5,7 @@ export default async function BlogsPage() {
   const blogs = await getBlogPosts()
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#FFF7EC] to-[#FFE1C6] py-20">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-20">
       <div className="container mx-auto px-4">
         <h1 className="text-4xl font-bold text-[#111111] text-center mb-8">All Blog Posts</h1>
         

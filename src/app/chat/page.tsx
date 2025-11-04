@@ -173,9 +173,9 @@ Be conversational, helpful, and focus on Devika's professional expertise. If ask
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#FFF7EC] to-[#FFE1C6]">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       {/* Header */}
-      <div className="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-orange-200">
+      <div className="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-200">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
@@ -186,7 +186,7 @@ Be conversational, helpful, and focus on Devika's professional expertise. If ask
                 </Link>
               </Button>
             </div>
-            <h1 className="text-xl font-bold text-[#FF8A3D]">Talk to My AI</h1>
+            <h1 className="text-xl font-bold text-gray-600">Talk to My AI</h1>
             <div className="w-32" /> {/* Spacer for centering */}
           </div>
         </div>
@@ -194,7 +194,7 @@ Be conversational, helpful, and focus on Devika's professional expertise. If ask
 
       {/* Chat Container */}
       <div className="container mx-auto px-4 py-6 max-w-4xl">
-        <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border border-orange-200 overflow-hidden">
+        <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
           {/* Messages Area */}
           <div className="h-[600px] overflow-y-auto p-6 space-y-4">
             <AnimatePresence>
@@ -211,8 +211,8 @@ Be conversational, helpful, and focus on Devika's professional expertise. If ask
                     {/* Avatar */}
                     <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
                       message.type === 'user' 
-                        ? 'bg-[#FF8A3D] text-white' 
-                        : 'bg-gradient-to-br from-orange-100 to-orange-200 text-[#FF8A3D]'
+                        ? 'bg-gray-600 text-white' 
+                        : 'bg-gradient-to-br from-gray-100 to-gray-200 text-gray-600'
                     }`}>
                       {message.type === 'user' ? <User className="h-4 w-4" /> : <Bot className="h-4 w-4" />}
                     </div>
@@ -220,8 +220,8 @@ Be conversational, helpful, and focus on Devika's professional expertise. If ask
                     {/* Message Bubble */}
                     <div className={`rounded-2xl px-4 py-3 ${
                       message.type === 'user' 
-                        ? 'bg-[#FF8A3D] text-white' 
-                        : 'bg-gradient-to-br from-orange-50 to-orange-100 text-gray-800 border border-orange-200'
+                        ? 'bg-gray-600 text-white' 
+                        : 'bg-gradient-to-br from-gray-50 to-gray-100 text-gray-800 border border-gray-200'
                     }`}>
                       {message.type === 'bot' ? (
                         <div className="text-sm leading-relaxed">
@@ -237,16 +237,16 @@ Be conversational, helpful, and focus on Devika's professional expertise. If ask
                                 li: ({children}) => <li className="text-sm text-gray-800">{children}</li>,
                                 strong: ({children}) => <strong className="font-bold text-gray-900">{children}</strong>,
                                 em: ({children}) => <em className="italic text-gray-700">{children}</em>,
-                                code: ({children}) => <code className="bg-orange-200 px-1 py-0.5 rounded text-xs font-mono text-orange-800">{children}</code>,
-                                pre: ({children}) => <pre className="bg-orange-100 p-3 rounded text-xs font-mono text-orange-900 overflow-x-auto mb-2">{children}</pre>,
+                                code: ({children}) => <code className="bg-gray-200 px-1 py-0.5 rounded text-xs font-mono text-gray-800">{children}</code>,
+                                pre: ({children}) => <pre className="bg-gray-100 p-3 rounded text-xs font-mono text-gray-900 overflow-x-auto mb-2">{children}</pre>,
                                 table: ({children}) => <table className="w-full border-collapse border border-gray-300 mb-3 text-xs">{children}</table>,
-                                thead: ({children}) => <thead className="bg-orange-50">{children}</thead>,
+                                thead: ({children}) => <thead className="bg-gray-50">{children}</thead>,
                                 tbody: ({children}) => <tbody>{children}</tbody>,
                                 tr: ({children}) => <tr className="border-b border-gray-200">{children}</tr>,
                                 th: ({children}) => <th className="border border-gray-300 px-2 py-1 text-left font-semibold text-gray-900">{children}</th>,
                                 td: ({children}) => <td className="border border-gray-300 px-2 py-1 text-gray-800">{children}</td>,
-                                blockquote: ({children}) => <blockquote className="border-l-2 border-orange-300 pl-2 ml-2 italic text-gray-700 mb-2">{children}</blockquote>,
-                                a: ({children, href}) => <a href={href} className="text-orange-600 hover:text-orange-700 underline" target="_blank" rel="noopener noreferrer">{children}</a>,
+                                blockquote: ({children}) => <blockquote className="border-l-2 border-gray-300 pl-2 ml-2 italic text-gray-700 mb-2">{children}</blockquote>,
+                                a: ({children, href}) => <a href={href} className="text-gray-600 hover:text-gray-700 underline" target="_blank" rel="noopener noreferrer">{children}</a>,
                               }}
                             >
                               {message.content}
@@ -261,7 +261,7 @@ Be conversational, helpful, and focus on Devika's professional expertise. If ask
                         <p className="text-sm leading-relaxed">{message.content}</p>
                       )}
                       <p className={`text-xs mt-2 ${
-                        message.type === 'user' ? 'text-orange-100' : 'text-gray-500'
+                        message.type === 'user' ? 'text-gray-100' : 'text-gray-500'
                       }`}>
                         {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                       </p>
@@ -279,14 +279,14 @@ Be conversational, helpful, and focus on Devika's professional expertise. If ask
                 className="flex justify-start"
               >
                 <div className="flex items-start space-x-3 max-w-[80%]">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-orange-100 to-orange-200 text-[#FF8A3D] flex items-center justify-center">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 text-gray-600 flex items-center justify-center">
                     <Bot className="h-4 w-4" />
                   </div>
-                  <div className="rounded-2xl px-4 py-3 bg-gradient-to-br from-orange-50 to-orange-100 border border-orange-200">
+                  <div className="rounded-2xl px-4 py-3 bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200">
                     <div className="flex space-x-1">
-                      <div className="w-2 h-2 bg-[#FF8A3D] rounded-full animate-bounce"></div>
-                      <div className="w-2 h-2 bg-[#FF8A3D] rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                      <div className="w-2 h-2 bg-[#FF8A3D] rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                      <div className="w-2 h-2 bg-gray-600 rounded-full animate-bounce"></div>
+                      <div className="w-2 h-2 bg-gray-600 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                      <div className="w-2 h-2 bg-gray-600 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                     </div>
                   </div>
                 </div>
@@ -297,20 +297,20 @@ Be conversational, helpful, and focus on Devika's professional expertise. If ask
           </div>
 
           {/* Input Area */}
-          <div className="border-t border-orange-200 p-4 bg-gradient-to-r from-orange-50/50 to-orange-100/50">
+          <div className="border-t border-gray-200 p-4 bg-gradient-to-r from-gray-50/50 to-gray-100/50">
             <div className="flex space-x-3">
               <Input
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Ask me about Devika's background, skills, projects..."
-                className="flex-1 border-orange-200 focus:border-[#FF8A3D] focus:ring-[#FF8A3D] rounded-full"
+                className="flex-1 border-gray-200 focus:border-gray-600 focus:ring-gray-600 rounded-full"
                 disabled={isLoading}
               />
               <Button
                 onClick={handleSendMessage}
                 disabled={!inputValue.trim() || isLoading}
-                className="bg-[#FF8A3D] hover:bg-[#FF8A3D]/90 text-white rounded-full px-6"
+                className="bg-gray-600 hover:bg-gray-600/90 text-white rounded-full px-6"
               >
                 <Send className="h-4 w-4" />
               </Button>

@@ -63,7 +63,7 @@ const experiences = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="section-padding bg-gradient-to-br from-[#FFF7EC] to-[#FFE1C6]">
+    <section id="experience" className="section-padding bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -92,11 +92,11 @@ export default function Experience() {
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <CardTitle className="text-xl mb-2 text-[#111111] flex items-center gap-2">
-                        <Briefcase className="h-5 w-5 text-[#FF8A3D]" />
+                        <Briefcase className="h-5 w-5 text-gray-600" />
                         {exp.title}
                       </CardTitle>
                       <CardDescription className="text-[#111111] font-semibold text-lg flex items-center gap-2">
-                        <Building className="h-4 w-4 text-[#FF8A3D]" />
+                        <Building className="h-4 w-4 text-gray-600" />
                         {exp.company}
                       </CardDescription>
                     </div>
@@ -110,11 +110,11 @@ export default function Experience() {
                   </div>
                   <div className="flex flex-col sm:flex-row sm:items-center gap-2 mt-3 text-sm text-[#6B6B6B]">
                     <div className="flex items-center gap-2">
-                      <Calendar className="h-4 w-4 text-[#FF8A3D]" />
+                      <Calendar className="h-4 w-4 text-gray-600" />
                       <span>{exp.period}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <MapPin className="h-4 w-4 text-[#FF8A3D]" />
+                      <MapPin className="h-4 w-4 text-gray-600" />
                       <span>{exp.location}</span>
                     </div>
                   </div>
@@ -123,7 +123,7 @@ export default function Experience() {
                   <ul className="space-y-2">
                     {exp.responsibilities.map((responsibility, idx) => (
                       <li key={idx} className="text-[#6B6B6B] text-sm leading-relaxed flex items-start gap-2">
-                        <span className="text-[#FF8A3D] mt-1.5 text-xs">●</span>
+                        <span className="text-gray-600 mt-1.5 text-xs">●</span>
                         <span>{responsibility}</span>
                       </li>
                     ))}

@@ -21,7 +21,7 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/20 bg-gradient-to-r from-[#FFF7EC]/95 to-[#FFE1C6]/95 backdrop-blur supports-[backdrop-filter]:bg-gradient-to-r supports-[backdrop-filter]:from-[#FFF7EC]/80 supports-[backdrop-filter]:to-[#FFE1C6]/80">
+    <header className="sticky top-0 z-50 w-full border-b border-white/20 bg-gradient-to-r from-gray-50/95 to-gray-100/95 backdrop-blur supports-[backdrop-filter]:bg-gradient-to-r supports-[backdrop-filter]:from-gray-50/80 supports-[backdrop-filter]:to-gray-100/80">
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center">
           <Link href="/" className="flex items-center space-x-2">
@@ -35,7 +35,7 @@ export function Header() {
             <Link
               key={item.name}
               href={item.href}
-              className="text-sm font-medium text-[#6B6B6B] hover:text-[#FF8A3D] transition-colors"
+              className="text-sm font-medium text-gray-600 hover:text-gray-800 transition-colors"
             >
               {item.name}
             </Link>
@@ -46,7 +46,7 @@ export function Header() {
           <Button 
             asChild
             size="sm" 
-            className="hidden md:flex bg-[#FF8A3D] hover:bg-[#FF8A3D]/90 text-white border-none rounded-full px-4 py-2 shadow-md"
+            className="hidden md:flex bg-gray-600 hover:bg-gray-600/90 text-white border-none rounded-full px-4 py-2 shadow-md"
           >
             <Link href="/chat">
               Talk to My AI
@@ -76,14 +76,14 @@ export function Header() {
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
           exit={{ opacity: 0, height: 0 }}
-          className="md:hidden border-t border-white/20 bg-gradient-to-r from-[#FFF7EC] to-[#FFE1C6]"
+          className="md:hidden border-t border-white/20 bg-gradient-to-r from-gray-50 to-gray-100"
         >
           <div className="container py-4 space-y-4">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="block text-sm font-medium text-[#6B6B6B] hover:text-[#FF8A3D] transition-colors"
+                className="block text-sm font-medium text-gray-600 hover:text-gray-800 transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item.name}
@@ -91,7 +91,7 @@ export function Header() {
             ))}
             <Link
               href="/chat"
-              className="block text-sm font-medium text-[#FF8A3D] hover:text-[#FF8A3D]/80 transition-colors font-semibold"
+              className="block text-sm font-medium text-gray-600 hover:text-gray-800 transition-colors font-semibold"
               onClick={() => setMobileMenuOpen(false)}
             >
               Talk to My AI
