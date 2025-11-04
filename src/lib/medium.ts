@@ -24,7 +24,7 @@ export async function getMediumPosts(username: string): Promise<MediumPost[]> {
     const rssUrl = `https://medium.com/@${username}/feed`
     
     // Use RSS2JSON service to convert RSS to JSON (CORS-friendly)
-    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&api_key=YOUR_API_KEY&count=10`
+    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&count=10`
     
     console.log('🔍 Fetching Medium posts from:', rssUrl)
     
