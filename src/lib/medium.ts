@@ -23,42 +23,76 @@ export async function getMediumPosts(username: string): Promise<MediumPost[]> {
     // Medium RSS feed URL
     const rssUrl = `https://medium.com/@${username}/feed`
     
-    // Use RSS2JSON service to convert RSS to JSON (CORS-friendly)
-    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&count=10`
-    
     console.log('🔍 Fetching Medium posts from:', rssUrl)
     
-    const response = await fetch(apiUrl, {
-      next: { revalidate: 3600 } // Cache for 1 hour
-    })
+    // Try multiple RSS2JSON services for better reliability
+    const apiUrls = [
+      `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}&count=10`,
+      `https://rss2json.com/api.json?rss_url=${encodeURIComponent(rssUrl)}&count=10`,
+      `https://api.allorigins.win/get?url=${encodeURIComponent(rssUrl)}`
+    ]
     
-    if (!response.ok) {
-      throw new Error(`Failed to fetch Medium posts: ${response.status}`)
+    for (const apiUrl of apiUrls) {
+      try {
+        console.log('🔄 Trying API:', apiUrl.split('?')[0])
+        
+        const response = await fetch(apiUrl, {
+          next: { revalidate: 300 }, // Cache for 5 minutes (shorter for fresh posts)
+          headers: {
+            'Accept': 'application/json',
+          }
+        })
+        
+        if (!response.ok) {
+          console.log(`❌ API failed with status: ${response.status}`)
+          continue
+        }
+        
+        const data = await response.json()
+        
+        // Handle different API response formats
+        let posts: MediumPost[] = []
+        
+        if (apiUrl.includes('allorigins')) {
+          // AllOrigins returns raw XML in contents
+          posts = parseRSSXML(data.contents || '')
+        } else {
+          // RSS2JSON format
+          if (data.status !== 'ok') {
+            console.log(`❌ RSS2JSON error: ${data.message}`)
+            continue
+          }
+          
+          posts = data.items?.map((item: any) => ({
+            title: item.title,
+            link: item.link,
+            pubDate: item.pubDate,
+            description: stripHtml(item.description || item.content || '').substring(0, 200) + '...',
+            content: item.content || '',
+            guid: item.guid,
+            categories: item.categories || [],
+            thumbnail: extractThumbnail(item.content || item.description || '')
+          })) || []
+        }
+        
+        if (posts.length > 0) {
+          console.log('✅ Medium posts fetched:', posts.length)
+          console.log('📝 Latest post:', posts[0]?.title)
+          return posts
+        }
+        
+      } catch (apiError) {
+        console.log('❌ API error:', apiError)
+        continue
+      }
     }
     
-    const data = await response.json()
+    // If all APIs fail, return empty array
+    console.log('❌ All RSS APIs failed')
+    return []
     
-    if (data.status !== 'ok') {
-      throw new Error(`RSS2JSON error: ${data.message}`)
-    }
-    
-    console.log('📝 Medium posts fetched:', data.items?.length || 0)
-    
-    // Transform the data to our format
-    const posts: MediumPost[] = data.items?.map((item: any) => ({
-      title: item.title,
-      link: item.link,
-      pubDate: item.pubDate,
-      description: stripHtml(item.description || item.content || ''),
-      content: item.content || '',
-      guid: item.guid,
-      categories: item.categories || [],
-      thumbnail: extractThumbnail(item.content || item.description || '')
-    })) || []
-    
-    return posts
   } catch (error) {
-    console.error('Error fetching Medium posts:', error)
+    console.error('❌ Error fetching Medium posts:', error)
     return []
   }
 }
@@ -122,12 +156,19 @@ function parseRSSXML(xml: string): MediumPost[] {
   const posts: MediumPost[] = []
   
   try {
+    console.log('🔍 Parsing RSS XML, length:', xml.length)
+    
     // Extract items using regex (simple approach)
     const itemMatches = xml.match(/<item>([\s\S]*?)<\/item>/g)
     
-    if (!itemMatches) return posts
+    if (!itemMatches) {
+      console.log('❌ No RSS items found in XML')
+      return posts
+    }
     
-    itemMatches.forEach(item => {
+    console.log('📝 Found RSS items:', itemMatches.length)
+    
+    itemMatches.forEach((item, index) => {
       const title = extractXMLContent(item, 'title')
       const link = extractXMLContent(item, 'link')
       const pubDate = extractXMLContent(item, 'pubDate')
@@ -135,29 +176,36 @@ function parseRSSXML(xml: string): MediumPost[] {
       const content = extractXMLContent(item, 'content:encoded') || description
       const guid = extractXMLContent(item, 'guid')
       
-      // Extract categories
-      const categoryMatches = item.match(/<category>(.*?)<\/category>/g) || []
+      // Extract categories (Medium uses CDATA)
+      const categoryMatches = item.match(/<category><!\[CDATA\[(.*?)\]\]><\/category>/g) || 
+                             item.match(/<category>(.*?)<\/category>/g) || []
       const categories = categoryMatches.map(cat => 
-        cat.replace(/<\/?category>/g, '').trim()
+        cat.replace(/<!\[CDATA\[|\]\]>/g, '').replace(/<\/?category>/g, '').trim()
       )
       
       if (title && link) {
+        const cleanTitle = stripHtml(title)
+        const cleanDescription = stripHtml(description || content || '').substring(0, 200)
+        
+        console.log(`📄 Post ${index + 1}: ${cleanTitle}`)
+        
         posts.push({
-          title: stripHtml(title),
+          title: cleanTitle,
           link,
           pubDate,
-          description: stripHtml(description).substring(0, 200) + '...',
+          description: cleanDescription + (cleanDescription.length >= 200 ? '...' : ''),
           content,
           guid,
           categories,
-          thumbnail: extractThumbnail(content)
+          thumbnail: extractThumbnail(content || description || '')
         })
       }
     })
   } catch (error) {
-    console.error('Error parsing RSS XML:', error)
+    console.error('❌ Error parsing RSS XML:', error)
   }
   
+  console.log('✅ Parsed posts:', posts.length)
   return posts
 }
 
@@ -165,7 +213,16 @@ function parseRSSXML(xml: string): MediumPost[] {
 function extractXMLContent(xml: string, tag: string): string {
   const regex = new RegExp(`<${tag}[^>]*>([\\s\\S]*?)<\\/${tag}>`, 'i')
   const match = xml.match(regex)
-  return match ? match[1].trim() : ''
+  if (!match) return ''
+  
+  let content = match[1].trim()
+  
+  // Handle CDATA sections
+  if (content.includes('<![CDATA[')) {
+    content = content.replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1')
+  }
+  
+  return content
 }
 
 // Format date for display
