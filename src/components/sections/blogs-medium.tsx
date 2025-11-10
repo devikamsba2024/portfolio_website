@@ -91,7 +91,7 @@ export default function BlogsMedium({ username = "your-medium-username", showAll
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6 }}
-                  className="lg:w-1/2"
+                  className="lg:w-2/5"
                 >
                   <Card className="h-full group hover:shadow-2xl transition-all duration-300 bg-white/90 backdrop-blur-sm border-white/70 relative">
                     {/* Latest badge */}
@@ -102,7 +102,7 @@ export default function BlogsMedium({ username = "your-medium-username", showAll
                     </div>
                     {displayPosts[0].thumbnail && (
                       <CardHeader className="p-0">
-                        <div className="relative h-64 lg:h-80 overflow-hidden rounded-t-lg">
+                        <div className="relative h-48 lg:h-56 overflow-hidden rounded-t-lg">
                           <Image
                             src={displayPosts[0].thumbnail}
                             alt={displayPosts[0].title}
@@ -118,7 +118,7 @@ export default function BlogsMedium({ username = "your-medium-username", showAll
                         </div>
                       </CardHeader>
                     )}
-                    <CardContent className="p-8">
+                    <CardContent className="p-6">
                       {displayPosts[0].pubDate && (
                         <div className="flex items-center gap-2 mb-4">
                           <Calendar className="w-5 h-5 text-gray-600" />
@@ -127,7 +127,7 @@ export default function BlogsMedium({ username = "your-medium-username", showAll
                           </span>
                         </div>
                       )}
-                      <CardTitle className="text-2xl lg:text-3xl mb-4 line-clamp-2 text-[#111111] group-hover:text-gray-600 transition-colors">
+                      <CardTitle className="text-xl lg:text-2xl mb-3 line-clamp-2 text-[#111111] group-hover:text-gray-600 transition-colors">
                         {displayPosts[0].title}
                       </CardTitle>
                       {displayPosts[0].description && (
@@ -172,7 +172,7 @@ export default function BlogsMedium({ username = "your-medium-username", showAll
 
               {/* Other posts - Smaller cards in vertical stack */}
               {displayPosts.length > 1 && (
-                <div className="lg:w-1/2 flex flex-col gap-6">
+                <div className="lg:w-3/5 flex flex-col gap-4">
                   {displayPosts.slice(1).map((post, index) => (
                     <motion.div
                       key={post.guid || index}

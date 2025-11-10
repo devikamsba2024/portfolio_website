@@ -42,8 +42,20 @@ export default async function ProjectsServer() {
 
   const projects = await getProjects()
   console.log('🎯 ProjectsServer - Server fetched:', projects.length, 'projects')
+  
+  // Debug: Log project images
+  projects.forEach((project, index) => {
+    if (project.featuredImage) {
+      console.log(`📸 Project ${index + 1} (${project.title}):`, project.featuredImage.url)
+    } else {
+      console.log(`❌ Project ${index + 1} (${project.title}): No featured image`)
+    }
+  })
 
   const displayProjects = projects.length > 0 ? projects : []
+  
+  // Add timestamp to help with image caching issues
+  const timestamp = Date.now()
 
   return (
     <section id="projects" className="py-20 bg-white/30">
@@ -61,18 +73,29 @@ export default async function ProjectsServer() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {displayProjects.slice(0, 6).map((project, index) => (
                 <Card 
-                  key={project.slug || index}
+                  key={`${project.slug || project.title}-${index}-${timestamp}`}
                   className="h-full group hover:shadow-xl transition-all duration-300 bg-white/90 backdrop-blur-sm border-white/70"
                 >
-                    {project.featuredImage && (
+                    {project.featuredImage && project.featuredImage.url ? (
                       <CardHeader className="p-0">
-                        <div className="relative h-48 overflow-hidden rounded-t-lg">
+                        <div className="relative h-48 overflow-hidden rounded-t-lg bg-gray-100">
                           <Image
                             src={project.featuredImage.url}
-                            alt={project.featuredImage.title}
+                            alt={project.featuredImage.title || project.title}
                             fill
                             className="object-cover group-hover:scale-105 transition-transform duration-300"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            priority={index < 3}
                           />
+                        </div>
+                      </CardHeader>
+                    ) : (
+                      <CardHeader className="p-0">
+                        <div className="relative h-48 overflow-hidden rounded-t-lg bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                          <div className="text-gray-400 text-center">
+                            <div className="text-2xl mb-2">📁</div>
+                            <div className="text-sm">Project Image</div>
+                          </div>
                         </div>
                       </CardHeader>
                     )}
@@ -97,8 +120,8 @@ export default async function ProjectsServer() {
                     <CardFooter className="p-6 pt-0 flex gap-2">
                       <Button 
                         asChild 
-                        variant="ghost" 
-                        className="flex-1 text-gray-600 hover:text-gray-800"
+                        variant="default" 
+                        className="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-semibold shadow-md"
                       >
                         <Link href={`/project/${project.slug || project.title.toLowerCase().replace(/\s+/g, '-')}`}>
                           View Details
