@@ -9,12 +9,12 @@ import { Button } from './ui/button'
 
 const navigation = [
   { name: 'Home', href: '/' },
-  { name: 'About', href: '/#about' },
-  { name: 'Education', href: '/#education' },
-  { name: 'Experience', href: '/#experience' },
-  { name: 'Projects', href: '/#projects' },
-  { name: 'Blogs', href: '/#blogs' },
-  { name: 'Contact', href: '/#contact' },
+  { name: 'About', href: '/about' },
+  { name: 'Education', href: '/education' },
+  { name: 'Experience', href: '/experience' },
+  { name: 'Projects', href: '/projects' },
+  { name: 'Blog', href: '/blog' },
+  { name: 'Contact', href: '/contact' },
 ]
 
 export function Header() {
