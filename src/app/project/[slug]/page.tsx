@@ -70,6 +70,16 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 li: ({children}) => <li className="mb-2 text-lg text-[#6B6B6B] leading-relaxed">{children}</li>,
                 strong: ({children}) => <strong className="font-semibold text-[#111111]">{children}</strong>,
                 code: ({children}) => <code className="bg-gray-100 px-2 py-1 rounded text-sm font-mono text-gray-600">{children}</code>,
+                a: ({href, children}) => (
+                  <a 
+                    href={href} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-gray-600 hover:text-gray-800 underline decoration-gray-400 hover:decoration-gray-600 underline-offset-2 transition-colors"
+                  >
+                    {children}
+                  </a>
+                ),
               }}
             >
               {project.description}
