@@ -13,10 +13,10 @@ const experiences = [
     period: "05/2025 to Current",
     type: "Research",
     responsibilities: [
-      "Spearheaded development of an AI-powered chatbot for NIAR and Wichita State University using open-source LLMs",
-      "Built a web-based interface, scalable inference pipeline, retrieval-augmented generation (RAG) modules, and a load-balanced deployment for seamless user interaction",
-      "Implemented monitoring dashboards and logging for observability, and integrated relational and vector databases to support retrieval-augmented responses",
-      "Deployed a functional prototype and currently advancing towards high availability, scalability, and production readiness"
+      "Built and deployed an end-to-end AI chatbot with a Next.js 15 (React 19) frontend and a Python-based RAG backend powered by vLLM-served open-source LLMs, delivering scalable and accurate information access for NIAR and Wichita State University",
+      "Containerized the entire AI stack using Docker, enabling reproducible environments, modular services, and efficient local and cloud deployments.",
+      "Deployed and managed the chatbot on AWS using Terraform (Infrastructure as Code), provisioning cloud resources, networking, and scalable inference infrastructure for production readiness.",
+      "Fine-tuned a large language model for financial decision support using companies' ad-hoc announcements, enabling rapid signal extraction and structured insights for downstream analytics and modeling."
     ]
   },
   {

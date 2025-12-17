@@ -25,6 +25,14 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'miro.medium.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'medium.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.medium.com',
+      },
     ],
     formats: ['image/webp', 'image/avif'],
   },

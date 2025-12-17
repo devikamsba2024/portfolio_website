@@ -63,16 +63,20 @@ export async function getMediumPosts(username: string): Promise<MediumPost[]> {
             continue
           }
           
-          posts = data.items?.map((item: any) => ({
-            title: item.title,
-            link: item.link,
-            pubDate: item.pubDate,
-            description: stripHtml(item.description || item.content || '').substring(0, 200) + '...',
-            content: item.content || '',
-            guid: item.guid,
-            categories: item.categories || [],
-            thumbnail: extractThumbnail(item.content || item.description || '')
-          })) || []
+          posts = data.items?.map((item: any) => {
+            const thumbnail = extractThumbnail(item.content || item.description || item.enclosure?.link || '')
+            console.log('📸 Extracted thumbnail:', thumbnail, 'for post:', item.title)
+            return {
+              title: item.title,
+              link: item.link,
+              pubDate: item.pubDate,
+              description: stripHtml(item.description || item.content || '').substring(0, 200) + '...',
+              content: item.content || '',
+              guid: item.guid,
+              categories: item.categories || [],
+              thumbnail: thumbnail
+            }
+          }) || []
         }
         
         if (posts.length > 0) {
@@ -147,8 +151,39 @@ function stripHtml(html: string): string {
 
 // Extract thumbnail from content
 function extractThumbnail(content: string): string | undefined {
-  const imgMatch = content.match(/<img[^>]+src="([^"]+)"[^>]*>/i)
-  return imgMatch ? imgMatch[1] : undefined
+  if (!content) return undefined
+  
+  // Try multiple patterns to find images
+  const patterns = [
+    /<img[^>]+src=["']([^"']+)["'][^>]*>/i,
+    /<img[^>]+src=([^\s>]+)[^>]*>/i,
+    /https?:\/\/[^\s<>"']+\.(?:jpg|jpeg|png|gif|webp)/i
+  ]
+  
+  for (const pattern of patterns) {
+    const match = content.match(pattern)
+    if (match) {
+      let url = match[1] || match[0]
+      // Clean up the URL - remove HTML entities
+      url = url
+        .replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'")
+      
+      // Only return Medium image URLs
+      if (url.includes('medium.com') || url.includes('cdn-images') || url.includes('miro.medium')) {
+        return url
+      }
+      // Or return any valid image URL if it looks like an image
+      if (/^https?:\/\/.+\.(jpg|jpeg|png|gif|webp)/i.test(url)) {
+        return url
+      }
+    }
+  }
+  
+  return undefined
 }
 
 // Simple RSS XML parser
@@ -187,7 +222,9 @@ function parseRSSXML(xml: string): MediumPost[] {
         const cleanTitle = stripHtml(title)
         const cleanDescription = stripHtml(description || content || '').substring(0, 200)
         
+        const thumbnail = extractThumbnail(content || description || '')
         console.log(`📄 Post ${index + 1}: ${cleanTitle}`)
+        console.log(`📸 Thumbnail: ${thumbnail || 'none'}`)
         
         posts.push({
           title: cleanTitle,
@@ -197,7 +234,7 @@ function parseRSSXML(xml: string): MediumPost[] {
           content,
           guid,
           categories,
-          thumbnail: extractThumbnail(content || description || '')
+          thumbnail: thumbnail
         })
       }
     })
