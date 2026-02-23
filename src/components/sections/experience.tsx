@@ -113,9 +113,6 @@ export default function Experience() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <div>
               <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-foreground mb-4 uppercase">Experience</h2>
-              <p className="text-muted-foreground text-lg max-w-2xl">
-                AI/ML Engineer with 6 years of experience building and deploying scalable Machine Learning and Generative AI solutions in enterprise environments.
-              </p>
             </div>
             <div className="hidden md:flex items-center gap-2 text-sm font-mono text-muted-foreground uppercase tracking-widest">
               <span>Timeline</span> <ArrowRight className="w-4 h-4" />

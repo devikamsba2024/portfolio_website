@@ -51,7 +51,7 @@ export function About() {
 
             <div className="space-y-6 text-base md:text-lg text-muted-foreground leading-relaxed">
               <p>
-                <span className="text-foreground font-semibold">AI/ML Engineer</span> with experience delivering scalable machine learning and GenAI solutions across retail, healthcare, and financial services. Skilled in building end-to-end ML pipelines from data engineering and feature design to deployment and production monitoring.
+                <span className="text-foreground font-semibold">AI/ML Engineer</span> with 7 years of experience delivering scalable machine learning and GenAI solutions across retail, Telecom, and financial services. Skilled in building end-to-end ML pipelines from data engineering and feature design to deployment and production monitoring.
               </p>
               <p>
                 Hands-on experience with <span className="text-foreground font-semibold">RAG systems</span> using LangChain and GPT-based models to enhance enterprise knowledge automation and reduce operational costs. Strong background in predictive modeling, segmentation, anomaly detection, and forecasting using Python, SQL, Scikit-learn, TensorFlow, and PyTorch.
