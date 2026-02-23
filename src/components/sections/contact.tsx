@@ -109,7 +109,7 @@ export function Contact() {
 
   const socialLinks = [
     { icon: Github, href: 'https://github.com/devikamsba2024', label: 'GitHub' },
-    { icon: Linkedin, href: 'https://www.linkedin.com/in/devika-nekkalapu/', label: 'LinkedIn' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/ndevika/', label: 'LinkedIn' },
     { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
   ]
 
