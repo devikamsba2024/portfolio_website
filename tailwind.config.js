@@ -57,8 +57,14 @@ module.exports = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        sans: ['var(--font-geist-sans)', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-geist-mono)', 'monospace'],
+      },
+      height: {
+        'screen': '100vh',
+      },
+      minHeight: {
+        'screen': '100vh',
       },
       animation: {
         "fade-in": "fadeIn 0.5s ease-in-out",

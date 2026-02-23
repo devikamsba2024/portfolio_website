@@ -1,137 +1,78 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { ArrowRight, Calendar } from "lucide-react"
-import Image from "next/image"
-import { formatDate } from "@/lib/utils"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+import { ExternalLink, CalendarDays } from "lucide-react"
+import Link from "next/link"
 
-// Dummy blogs data
-const dummyBlogs = [
+const blogs = [
   {
     id: "1",
-    title: "The Rise of Autonomous System Intelligence (ASI)",
-    excerpt: "Exploring the next frontier in AI: Autonomous System Intelligence and its potential to revolutionize how machines think, learn, and interact with the world.",
-    publishedDate: "2024-01-15",
-    tags: ["ASI", "AI", "Autonomous Systems", "Machine Learning"],
-    slug: "rise-of-autonomous-system-intelligence",
-    featuredImage: {
-      url: "https://images.unsplash.com/photo-1673187730317-4973d8d0d8e8?w=800&h=600&fit=crop",
-      alt: "Autonomous System Intelligence"
-    }
+    title: "Beyond Reason: Unveiling the Unseen Powers of Gemini 3",
+    date: "November 20, 2025",
+    description: "A deep dive into Google's Gemini 3 release, its benchmarking performance on Humanity’s Last Exam, and the new 'Deep Think' architecture.",
+    link: "https://medium.com/@devikanekkalapu7/beyond-reason-unveiling-the-unseen-powers-of-gemini-3-35f854f197ed",
   },
   {
     id: "2",
-    title: "Advanced AI Agents: Beyond Traditional Chatbots",
-    excerpt: "How modern AI agents are evolving from simple chatbots to sophisticated autonomous systems capable of complex reasoning and decision-making.",
-    publishedDate: "2024-01-10",
-    tags: ["AI Agents", "Chatbots", "Autonomous Systems", "AI"],
-    slug: "advanced-ai-agents-beyond-chatbots",
-    featuredImage: {
-      url: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=600&fit=crop",
-      alt: "Advanced AI Agents"
-    }
-  },
-  {
-    id: "3",
-    title: "The Future of AI Research: Trends and Predictions",
-    excerpt: "An analysis of emerging trends in AI research, from large language models to autonomous systems, and what the future holds for artificial intelligence.",
-    publishedDate: "2024-01-05",
-    tags: ["AI Research", "Trends", "Machine Learning", "Future Tech"],
-    slug: "future-of-ai-research-trends",
-    featuredImage: {
-      url: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
-      alt: "AI Research Future"
-    }
+    title: "What Makes Claude Skills Different from Agents, and Why It Matters",
+    date: "November 5, 2025",
+    description: "Examining the evolution of large language models from passive chatbots to active agents that can browse the web and execute complex tasks.",
+    link: "https://medium.com/@devikanekkalapu7/what-makes-claude-skills-different-from-agents-and-why-it-matters-46a3df2bcec1",
   }
 ]
 
-export default function Blogs() {
+export function Blogs() {
   return (
-    <section id="blogs" className="section-padding bg-white/50">
-      <div className="container">
+    <section id="blogs" className="relative min-h-[50vh] flex flex-col justify-center py-20 bg-background section-scroll-snap overflow-hidden">
+
+      <div className="container px-4 md:px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="mb-12"
         >
-          <h2 className="text-4xl font-bold mb-4 text-[#111111]">Latest Insights</h2>
-          <p className="text-[#6B6B6B] text-lg max-w-2xl mx-auto">
-            Thoughts, research, and insights on the latest developments in AI and autonomous systems.
+          <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-foreground mb-4 uppercase">Latest Articles</h2>
+          <p className="text-muted-foreground text-lg max-w-2xl">
+            Thoughts on AI, technology, and the future.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {dummyBlogs.map((blog, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl">
+          {blogs.map((blog, index) => (
             <motion.div
               key={blog.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <Card className="h-full group hover:shadow-xl transition-all duration-300 bg-white/90 backdrop-blur-sm border-white/70">
-                <CardHeader className="p-0">
-                  <div className="relative h-48 overflow-hidden rounded-t-lg">
-                    <Image
-                      src={blog.featuredImage.url}
-                      alt={blog.featuredImage.alt}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                </CardHeader>
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Calendar className="w-4 h-4 text-[#6B6B6B]" />
-                    <span className="text-sm text-[#6B6B6B]">
-                      {formatDate(blog.publishedDate)}
-                    </span>
-                  </div>
-                  <CardTitle className="text-xl mb-3 line-clamp-2 text-[#111111]">{blog.title}</CardTitle>
-                  <CardDescription className="text-[#6B6B6B] mb-4 line-clamp-3">
-                    {blog.excerpt}
-                  </CardDescription>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {blog.tags.slice(0, 3).map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3 py-1 bg-gray-600/10 text-gray-600 text-xs rounded-full font-medium"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </CardContent>
-                <CardFooter className="p-6 pt-0">
-                  <Button asChild variant="ghost" className="w-full group text-gray-600 hover:bg-gray-600/10 rounded-full">
-                    <a href={`/blog/${blog.slug}`}>
-                      Read More
-                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                    </a>
-                  </Button>
-                </CardFooter>
-              </Card>
+              <Link href={blog.link} target="_blank" className="group block h-full">
+                <Card className="h-full bg-card/60 backdrop-blur-md border border-border/50 shadow-sm hover:shadow-lg hover:border-accent/50 transition-all duration-300">
+                  <CardHeader>
+                    <div className="flex justify-between items-start mb-2">
+                      <div className="flex items-center gap-2 text-xs text-muted-foreground font-mono uppercase tracking-widest">
+                        <CalendarDays className="w-3 h-3" />
+                        {blog.date}
+                      </div>
+                      <ExternalLink className="w-5 h-5 text-muted-foreground group-hover:text-accent transition-colors" />
+                    </div>
+                    <CardTitle className="text-xl font-bold text-foreground group-hover:text-accent transition-colors leading-tight">
+                      {blog.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription className="text-base line-clamp-3">
+                      {blog.description}
+                    </CardDescription>
+                  </CardContent>
+                </Card>
+              </Link>
             </motion.div>
           ))}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-center mt-12"
-        >
-          <Button asChild size="lg" className="bg-gray-600 hover:bg-gray-600/90 text-white rounded-full px-8 py-3 shadow-lg">
-            <a href="/blog">
-              View All Posts
-            </a>
-          </Button>
-        </motion.div>
       </div>
     </section>
   )

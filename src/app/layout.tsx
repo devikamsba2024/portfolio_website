@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
-import { Inter, JetBrains_Mono } from 'next/font/google'
+import { GeistSans } from 'geist/font/sans'
+import { GeistMono } from 'geist/font/mono'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
-
-const inter = Inter({ subsets: ['latin'] })
-const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'] })
+import { StickyNavigation } from '@/components/navigation'
+import { AnimatedBackground } from '@/components/animated-background'
 
 export const metadata: Metadata = {
   title: 'Devika Portfolio',
@@ -46,8 +46,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased`}>
+    <html lang="en" suppressHydrationWarning className={`${GeistSans.variable} ${GeistMono.variable}`}>
+      <body className={`${GeistSans.className} antialiased`}>
+        <AnimatedBackground />
+        <div className="bg-noise" />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -55,6 +57,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
+          <StickyNavigation />
           {children}
           <Footer />
         </ThemeProvider>

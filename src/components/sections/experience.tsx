@@ -1,135 +1,225 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Briefcase, Calendar, MapPin, Building } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Building, MapPin, ArrowRight, ChevronDown } from "lucide-react"
+import { SpotlightCard } from "@/components/ui/spotlight-card"
+import { useState } from "react"
 
 const experiences = [
   {
     id: "1",
-    title: "Graduate Research Assistant",
+    title: "AI/ML Engineer",
     company: "National Institute for Aviation Research",
     location: "Wichita, KS",
-    period: "05/2025 to Current",
-    type: "Research",
+    period: "01/2025 - Present",
+    type: "Contract",
+    logo: "NIAR",
     responsibilities: [
-      "Built and deployed an end-to-end AI chatbot with a Next.js 15 (React 19) frontend and a Python-based RAG backend powered by vLLM-served open-source LLMs, delivering scalable and accurate information access for NIAR and Wichita State University",
-      "Containerized the entire AI stack using Docker, enabling reproducible environments, modular services, and efficient local and cloud deployments.",
-      "Deployed and managed the chatbot on AWS using Terraform (Infrastructure as Code), provisioning cloud resources, networking, and scalable inference infrastructure for production readiness.",
-      "Fine-tuned a large language model for financial decision support using companies' ad-hoc announcements, enabling rapid signal extraction and structured insights for downstream analytics and modeling."
+      "Designed and deployed a production-grade GenAI platform utilizing Python and Retrieval-Augmented Generation (RAG).",
+      "Built end-to-end RAG pipelines with LangChain, enhancing context-aware responses through hybrid search.",
+      "Developed agentic AI workflows for multi-step reasoning and dynamic tool orchestration.",
+      "Architected scalable, cloud-native AI systems on AWS, ensuring efficient LLM inference with GPU deployment."
     ]
   },
   {
     id: "2",
-    title: "FREDS AI Task Force GRA",
-    company: "Wichita State University",
-    location: "Wichita, KS", 
-    period: "01/2025 to 05/2025",
-    type: "Research",
-    responsibilities: [
-      "Working as a Research Assistant, focusing on integrating AI tools and technologies into the Finance, Real Estate, and Decision Sciences (FREDS) Department at the Barton School of Business, Wichita State University",
-      "Researched and worked on the WSDM Cup 2025 'Multilingual Chatbot Arena' project, applying large language models to predict human-preferred responses",
-      "Fine-tuned multilingual models using QLoRA and low-rank adaptation techniques to enable efficient training on limited hardware"
-    ]
-  },
-  {
-    id: "3",
-    title: "Senior Software Engineer",
+    title: "Senior Machine Learning Engineer",
     company: "Torry Harris Integration Solutions",
-    location: "Bangalore, India",
-    period: "10/2022 to 01/2024",
+    location: "Bengaluru, Karnataka, India",
+    period: "10/2022 - 01/2024",
     type: "Full-time",
+    logo: "THIS",
     responsibilities: [
-      "Worked as a Data Analyst for a leading British Telecommunications client, focusing on sales analysis for mobile networks, broadband services, and TV packages",
-      "Developed predictive models using machine learning algorithms to forecast customer behavior and improve retention strategies, resulting in a 9% increase in customer retention",
-      "Advanced analytics on customer data using SQL and Python to uncover patterns and trends, informing strategic decisions that contributed to a 6% reduction in churn rate",
-      "Created dashboards and periodic reports using Tableau offering insights into market trends, operational efficiency, and customer behavior"
+      "Delivered large-scale machine learning solutions on GCP for telecom churn prediction and personalized revenue growth.",
+      "Built hybrid ensemble churn models, achieving 82% recall and reducing churn by 15%.",
+      "Developed scalable feature pipelines in BigQuery for batch and near-real-time data ingestion.",
+      "Operationalized training and deployment using Vertex AI for reproducible workflows and low-latency inference."
     ]
   },
   {
     id: "4",
-    title: "Senior Software Engineer",
-    company: "TekSystems Global Services",
-    location: "Hyderabad, India",
-    period: "02/2020 to 10/2022",
+    title: "Senior Data Scientist",
+    company: "TEKsystems Global Services in India",
+    location: "Hyderabad, Telangana, India",
+    period: "02/2020 - 10/2022",
     type: "Full-time",
+    logo: "TEK",
     responsibilities: [
-      "Developed and deployed RESTful APIs using MuleSoft Anypoint Platform, integrating HubSpot, MDM Systems, IBM Kenexa, and PeopleSoft for seamless candidate tracking and event management",
-      "Enhanced API security and scalability by developing Apigee proxies, strengthening API infrastructure, and ensuring reliable communication channels",
-      "Received SPOT Award and 'Best Project' for exceptional performance and contributions to the Applicant Candidate Tracker project"
+      "Developed Customer Lifetime Value (CLV) models using XGBoost to enhance value-based targeting strategies.",
+      "Engineered behavioral features like RFM metrics and transaction velocity to analyze customer patterns at scale.",
+      "Implemented MLOps workflows on AWS for model training and performance monitoring in a regulated banking environment."
+    ]
+  },
+  {
+    id: "5",
+    title: "Data Scientist",
+    company: "Wipro",
+    location: "Bengaluru, Karnataka, India",
+    period: "06/2018 - 02/2020",
+    type: "Full-time",
+    logo: "WIP",
+    responsibilities: [
+      "Delivered data-driven insights through analytics and reporting initiatives, enhancing business decision-making.",
+      "Built optimized SQL workflows using Python, improving data reliability and processing efficiency.",
+      "Developed forecasting and variance analysis reports, along with Tableau dashboards for performance tracking."
     ]
   }
 ]
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, x: 50 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.5,
+    },
+  },
+}
+
+
 export default function Experience() {
+  const [expandedId, setExpandedId] = useState<string | null>(null)
+
+  const toggleExpand = (id: string) => {
+    setExpandedId(expandedId === id ? null : id)
+  }
+
   return (
-    <section id="experience" className="section-padding bg-gradient-to-br from-gray-50 to-gray-100">
-      <div className="container">
+    <section id="experience" className="relative min-h-screen flex flex-col justify-center py-20 bg-background section-scroll-snap overflow-hidden">
+
+
+
+      <div className="container px-4 md:px-6 relative z-10">
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="mb-12"
         >
-          <h2 className="text-4xl font-bold mb-4 text-[#111111]">Professional Experience</h2>
-          <p className="text-[#6B6B6B] text-lg max-w-2xl mx-auto">
-            Building AI solutions, conducting research, and delivering data-driven insights across various industries.
-          </p>
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+            <div>
+              <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-foreground mb-4 uppercase">Experience</h2>
+              <p className="text-muted-foreground text-lg max-w-2xl">
+                AI/ML Engineer with 6 years of experience building and deploying scalable Machine Learning and Generative AI solutions in enterprise environments.
+              </p>
+            </div>
+            <div className="hidden md:flex items-center gap-2 text-sm font-mono text-muted-foreground uppercase tracking-widest">
+              <span>Timeline</span> <ArrowRight className="w-4 h-4" />
+            </div>
+          </div>
         </motion.div>
 
-        <div className="max-w-4xl mx-auto space-y-8">
+        {/* Vertical Timeline */}
+        <div className="relative max-w-4xl mx-auto">
+          {/* Timeline Line */}
+          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-purple-600 via-violet-500 to-purple-600"></div>
+
           {experiences.map((exp, index) => (
             <motion.div
               key={exp.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              className={`relative flex items-center mb-16 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                }`}
             >
-              <Card className="hover:shadow-xl transition-all duration-300 bg-white/80 backdrop-blur-sm border-white/50">
-                <CardHeader className="pb-4">
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <CardTitle className="text-xl mb-2 text-[#111111] flex items-center gap-2">
-                        <Briefcase className="h-5 w-5 text-gray-600" />
-                        {exp.title}
-                      </CardTitle>
-                      <CardDescription className="text-[#111111] font-semibold text-lg flex items-center gap-2">
-                        <Building className="h-4 w-4 text-gray-600" />
-                        {exp.company}
-                      </CardDescription>
+              {/* Timeline Dot */}
+              <div className="absolute left-4 md:left-1/2 w-4 h-4 -ml-2 rounded-full bg-gradient-to-r from-purple-600 to-violet-600 shadow-lg shadow-purple-500/50 z-10 flex items-center justify-center">
+                <motion.div
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="w-2 h-2 rounded-full bg-white"
+                />
+              </div>
+
+              {/* Content */}
+              <div className={`w-full md:w-[calc(50%-2rem)] ml-12 md:ml-0 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'
+                }`}>
+                <SpotlightCard
+                  className="h-full bg-card/60 backdrop-blur-md border border-border/50 shadow-sm hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-500 hover:-translate-y-2 hover:border-purple-500/50"
+                  spotlightColor="rgba(168, 85, 247, 0.08)"
+                >
+                  <CardHeader
+                    className="pb-4 border-b border-border/50 cursor-pointer select-none"
+                    onClick={() => toggleExpand(exp.id)}
+                  >
+                    <div className="flex justify-between items-start mb-4">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-600 to-violet-600 text-white flex items-center justify-center font-black text-xs shadow-lg hover:scale-110 transition-transform duration-300">
+                        {exp.logo}
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[10px] md:text-xs font-mono-premium text-purple-600 bg-purple-50 px-2 py-1 rounded-sm border border-purple-200">
+                          {exp.period}
+                        </span>
+                        <motion.div
+                          animate={{ rotate: expandedId === exp.id ? 180 : 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="text-purple-600"
+                        >
+                          <ChevronDown className="w-5 h-5" />
+                        </motion.div>
+                      </div>
                     </div>
-                    <span className={`px-3 py-1 text-xs rounded-full font-medium ${
-                      exp.type === 'Research' 
-                        ? 'bg-purple-100 text-purple-700' 
-                        : 'bg-blue-100 text-blue-700'
-                    }`}>
-                      {exp.type}
-                    </span>
-                  </div>
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 mt-3 text-sm text-[#6B6B6B]">
-                    <div className="flex items-center gap-2">
-                      <Calendar className="h-4 w-4 text-gray-600" />
-                      <span>{exp.period}</span>
+
+                    <CardTitle className="text-xl md:text-2xl font-bold text-foreground mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-violet-600 transition-all duration-300">
+                      {exp.title}
+                    </CardTitle>
+
+                    <div className="flex flex-col gap-1 text-sm text-muted-foreground">
+                      <span className="font-medium text-foreground flex items-center gap-1.5">
+                        <Building className="w-3.5 h-3.5" /> {exp.company}
+                      </span>
+                      <span className="flex items-center gap-1.5 text-xs font-mono">
+                        <MapPin className="w-3.5 h-3.5" /> {exp.location}
+                      </span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <MapPin className="h-4 w-4 text-gray-600" />
-                      <span>{exp.location}</span>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent className="pt-0">
-                  <ul className="space-y-2">
-                    {exp.responsibilities.map((responsibility, idx) => (
-                      <li key={idx} className="text-[#6B6B6B] text-sm leading-relaxed flex items-start gap-2">
-                        <span className="text-gray-600 mt-1.5 text-xs">●</span>
-                        <span>{responsibility}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
+                  </CardHeader>
+
+                  <AnimatePresence>
+                    {expandedId === exp.id && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="overflow-hidden"
+                      >
+                        <CardContent className="pt-6">
+                          <ul className="space-y-3">
+                            {exp.responsibilities.map((resp, idx) => (
+                              <motion.li
+                                key={idx}
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.4, delay: idx * 0.1 }}
+                                className="text-muted-foreground text-sm leading-relaxed flex items-start gap-3"
+                              >
+                                <span className="min-w-[6px] h-[6px] rounded-full bg-purple-600 mt-2"></span>
+                                <span>{resp}</span>
+                              </motion.li>
+                            ))}
+                          </ul>
+                        </CardContent>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </SpotlightCard>
+              </div>
             </motion.div>
           ))}
         </div>

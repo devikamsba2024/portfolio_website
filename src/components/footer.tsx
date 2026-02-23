@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Github, Linkedin, Twitter, Mail } from 'lucide-react'
+import { MagneticButton } from "@/components/ui/magnetic-button"
 
 const socialLinks = [
   {
@@ -26,22 +27,23 @@ export function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <div className="flex items-center space-x-2">
             <span className="text-sm text-muted-foreground">
-              © 2024 Devika Nekkalapu. All rights reserved.
+              © {new Date().getFullYear()} Devika Nekkalapu. All rights reserved.
             </span>
           </div>
-          
+
           <div className="flex items-center space-x-4">
             {socialLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className="sr-only">{link.name}</span>
-                <link.icon className="h-5 w-5" />
-              </Link>
+              <MagneticButton key={link.name} strength={20}>
+                <Link
+                  href={link.href}
+                  className="text-muted-foreground hover:text-foreground transition-colors p-2 block"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="sr-only">{link.name}</span>
+                  <link.icon className="h-5 w-5" />
+                </Link>
+              </MagneticButton>
             ))}
           </div>
         </div>

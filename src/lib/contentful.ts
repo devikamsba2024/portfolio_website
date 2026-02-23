@@ -1,7 +1,7 @@
 import { createClient } from 'contentful'
 
-const spaceId = process.env.CONTENTFUL_SPACE_ID
-const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN
+const spaceId = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
+const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN
 
 export const contentfulClient = spaceId && accessToken ? createClient({
   space: spaceId,
@@ -31,8 +31,10 @@ export interface Project {
   title: string
   slug?: string
   description: string
+  category?: string
   techStack?: string[]
   githubUrl?: string
+  demoUrl?: string
   featuredImage?: {
     url: string
     title: string
@@ -87,12 +89,12 @@ export async function getProjects(): Promise<Project[]> {
       let featuredImage = null
       if (item.fields.featuredImage) {
         let imageAsset = null
-        
+
         // If it's an array, take the first item
         if (Array.isArray(item.fields.featuredImage) && item.fields.featuredImage.length > 0) {
           const imageId = item.fields.featuredImage[0].sys.id
           imageAsset = response.includes?.Asset?.find((asset: any) => asset.sys.id === imageId)
-        } 
+        }
         // If it's a single object
         else if (item.fields.featuredImage.sys) {
           const imageId = item.fields.featuredImage.sys.id
@@ -115,8 +117,10 @@ export async function getProjects(): Promise<Project[]> {
         title: item.fields.title,
         slug: item.fields.slug || item.fields.title?.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '') || 'project',
         description: item.fields.description,
+        category: item.fields.category || '',
         techStack: item.fields.techStack || [],
         githubUrl: item.fields.githubUrl || '',
+        demoUrl: item.fields.demoUrl || item.fields.githubUrl || '',
         featuredImage,
       }
     })

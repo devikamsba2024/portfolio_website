@@ -1,37 +1,31 @@
 import { getProjects } from "@/lib/contentful"
 import Link from "next/link"
 import Image from "next/image"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Github } from "lucide-react"
+import { ArrowLeft, Github, ExternalLink, ArrowRight } from "lucide-react"
+import { SpotlightCard } from "@/components/ui/spotlight-card"
 
 // Helper function to create a plain text excerpt from markdown
-function createExcerpt(markdown: string, maxLength: number = 200): string {
+function createExcerpt(markdown: string, maxLength: number = 150): string {
   if (!markdown) return ''
-  
-  // Remove markdown syntax comprehensively
+
   const plainText = markdown
-    .replace(/#{1,6}\s+/g, '') // Remove headers
-    .replace(/\*\*\*([^*]+)\*\*\*/g, '$1') // Remove bold+italic
-    .replace(/\*\*([^*]+)\*\*/g, '$1') // Remove bold
-    .replace(/\*([^*]+)\*/g, '$1') // Remove italic
-    .replace(/__([^_]+)__/g, '$1') // Remove bold (underscore)
-    .replace(/_([^_]+)_/g, '$1') // Remove italic (underscore)
-    .replace(/~~([^~]+)~~/g, '$1') // Remove strikethrough
-    .replace(/`{3}[\s\S]*?`{3}/g, '') // Remove code blocks
-    .replace(/`([^`]+)`/g, '$1') // Remove inline code
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // Remove links
-    .replace(/!\[([^\]]*)\]\([^)]+\)/g, '') // Remove images
-    .replace(/\|[^|\n]*\|/g, '') // Remove tables
-    .replace(/^[\s]*[-*+]\s+/gm, '') // Remove list bullets
-    .replace(/^[\s]*\d+\.\s+/gm, '') // Remove numbered lists
-    .replace(/^[\s]*>\s+/gm, '') // Remove blockquotes
-    .replace(/---+/g, '') // Remove horizontal rules
-    .replace(/\n+/g, ' ') // Replace newlines with spaces
-    .replace(/\s+/g, ' ') // Replace multiple spaces with single space
+    .replace(/#{1,6}\s+/g, '')
+    .replace(/\*\*\*([^*]+)\*\*\*/g, '$1')
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/\*([^*]+)\*/g, '$1')
+    .replace(/__([^_]+)__/g, '$1')
+    .replace(/_([^_]+)_/g, '$1')
+    .replace(/~~([^~]+)~~/g, '$1')
+    .replace(/`{3}[\s\S]*?`{3}/g, '')
+    .replace(/`([^`]+)`/g, '$1')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/!\[([^\]]*)\]\([^)]+\)/g, '')
+    .replace(/\n+/g, ' ')
+    .replace(/\s+/g, ' ')
     .trim()
-  
-  // Truncate to maxLength
+
   if (plainText.length <= maxLength) return plainText
   return plainText.substring(0, maxLength).trim() + '...'
 }
@@ -40,99 +34,115 @@ export default async function ProjectsPage() {
   const projects = await getProjects()
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-20">
-      <div className="container mx-auto px-4">
-        <h1 className="text-4xl font-bold text-[#111111] text-center mb-8">All Projects</h1>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <Card 
-              key={project.slug || project.title}
-              className="h-full group hover:shadow-xl transition-all duration-300 bg-white/90 backdrop-blur-sm border-white/70"
-            >
-              {project.featuredImage && project.featuredImage.url ? (
-                <CardHeader className="p-0">
-                  <div className="relative h-48 overflow-hidden rounded-t-lg bg-gray-100">
+    <div className="relative min-h-screen pt-32 pb-20 overflow-hidden">
+      <div className="container px-4 md:px-6 relative z-10">
+        <div className="mb-16">
+          <Link
+            href="/#projects"
+            className="group inline-flex items-center gap-2 text-muted-foreground hover:text-purple-600 transition-colors duration-300 mb-12"
+          >
+            <div className="p-2 rounded-full bg-secondary/50 border border-border/50 group-hover:border-purple-500/50 group-hover:bg-purple-500/10 transition-all">
+              <ArrowLeft className="w-4 h-4" />
+            </div>
+            <span className="font-mono text-xs tracking-widest uppercase">Back to Home</span>
+          </Link>
+
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div>
+              <h1 className="text-5xl md:text-8xl font-black tracking-tighter mb-4 leading-none">
+                ALL <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-violet-600">WORKS</span>
+              </h1>
+              <p className="text-muted-foreground text-lg max-w-2xl">
+                A complete directory of my technical projects, explorations, and research in AI and Machine Learning.
+              </p>
+            </div>
+            <div className="text-[10px] font-mono text-muted-foreground uppercase tracking-[0.3em] bg-secondary/30 px-4 py-2 border border-border/50 backdrop-blur-sm">
+              Total Projects: {projects.length}
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+          {projects.map((project) => (
+            <Link key={project.slug || project.title} href={`/project/${project.slug}`}>
+              <SpotlightCard
+                className="h-full bg-card/40 backdrop-blur-md border border-border/50 rounded-none group cursor-pointer transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/10 hover:-translate-y-2 hover:border-purple-500/30"
+                spotlightColor="rgba(168, 85, 247, 0.1)"
+              >
+                <CardHeader className="p-0 mb-6 overflow-hidden relative aspect-video">
+                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors z-10" />
+                  {project.featuredImage ? (
                     <Image
                       src={project.featuredImage.url}
                       alt={project.featuredImage.title || project.title}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-1000"
                     />
-                  </div>
+                  ) : (
+                    <div className="w-full h-full bg-gradient-to-br from-purple-900/40 to-violet-900/40 flex items-center justify-center">
+                      <span className="text-6xl font-black text-white/10 uppercase">{project.title.charAt(0)}</span>
+                    </div>
+                  )}
                 </CardHeader>
-              ) : (
-                <CardHeader className="p-0">
-                  <div className="relative h-48 overflow-hidden rounded-t-lg bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                    <div className="text-gray-400 text-center">
-                      <div className="text-2xl mb-2">📁</div>
-                      <div className="text-sm">Project Image</div>
+
+                <CardContent className="p-8 pt-0">
+                  <div className="flex justify-between items-start mb-4">
+                    <span className="text-[10px] font-mono text-purple-600 tracking-widest bg-purple-500/10 px-2 py-1 rounded-sm border border-purple-500/20 uppercase">
+                      {project.category || "Project"}
+                    </span>
+                    <div className="flex gap-4 opacity-40 group-hover:opacity-100 transition-opacity">
+                      {project.githubUrl && (
+                        <span className="hover:text-purple-600 transition-colors">
+                          <Github className="w-5 h-5" />
+                        </span>
+                      )}
+                      {project.demoUrl && (
+                        <span className="hover:text-purple-600 transition-colors">
+                          <ExternalLink className="w-5 h-5" />
+                        </span>
+                      )}
                     </div>
                   </div>
-                </CardHeader>
-              )}
-              
-              <CardContent className="p-6">
-                <CardTitle className="text-xl mb-3 line-clamp-2 text-[#111111]">{project.title}</CardTitle>
-                <CardDescription className="text-[#6B6B6B] mb-4 line-clamp-3">
-                  {createExcerpt(project.description, 150)}
-                </CardDescription>
-                {project.techStack && project.techStack.length > 0 && (
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.techStack.map((tech: string) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1 bg-gray-600/10 text-gray-600 text-xs rounded-full font-medium"
-                      >
+
+                  <CardTitle className="text-3xl md:text-4xl font-bold mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-violet-500 transition-all duration-300">
+                    {project.title}
+                  </CardTitle>
+
+                  <p className="text-muted-foreground text-lg mb-8 line-clamp-2 font-light">
+                    {createExcerpt(project.description, 150)}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mt-auto">
+                    {project.techStack?.map((tech) => (
+                      <span key={tech} className="text-[10px] font-mono text-muted-foreground/60 bg-secondary/50 px-2 py-1 rounded-sm border border-border/50 uppercase tracking-tight">
                         {tech}
                       </span>
                     ))}
                   </div>
-                )}
-              </CardContent>
-              
-              <CardFooter className="p-6 pt-0 flex gap-2">
-                <Button 
-                  asChild 
-                  variant="default" 
-                  className="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-semibold shadow-md"
-                >
-                  <Link href={`/project/${project.slug || project.title.toLowerCase().replace(/\s+/g, '-')}`}>
-                    View Details
-                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </Button>
-                {project.githubUrl && (
-                  <Button 
-                    asChild 
-                    variant="outline" 
-                    size="sm" 
-                    className="border-gray-600 text-gray-600 hover:bg-gray-600 hover:text-white"
-                  >
-                    <a 
-                      href={project.githubUrl} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                    >
-                      <Github className="w-4 h-4" />
-                    </a>
-                  </Button>
-                )}
-              </CardFooter>
-            </Card>
+
+                  <div className="mt-8 flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-widest text-purple-600 opacity-0 group-hover:opacity-100 transition-all transform translate-x-[-10px] group-hover:translate-x-0">
+                    View Case Study <ArrowRight className="w-3 h-3" />
+                  </div>
+                </CardContent>
+              </SpotlightCard>
+            </Link>
           ))}
         </div>
-        
-        <div className="text-center mt-8">
-          <Link 
-            href="/"
-            className="text-gray-600 hover:text-gray-800 hover:underline transition-colors"
+
+        <div className="mt-24 pt-12 border-t border-border/50 flex flex-col md:flex-row items-center justify-between gap-8">
+          <div>
+            <h3 className="text-2xl font-black tracking-tighter mb-2">HAVE A PROJECT IN MIND?</h3>
+            <p className="text-muted-foreground">Open for collaborations and interesting challenges.</p>
+          </div>
+          <Link
+            href="/#contact"
+            className="px-10 py-5 bg-foreground text-background font-black tracking-tighter hover:bg-purple-600 hover:text-white transition-all uppercase text-sm"
           >
-            ← Back to Home
+            Start a Conversation
           </Link>
         </div>
       </div>
     </div>
   )
 }
+
