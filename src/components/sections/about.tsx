@@ -20,22 +20,25 @@ export function About() {
           A B O U T
         </motion.h2>
 
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-start">
 
-          {/* Left Column: Profile Image */}
+          {/* Left Column: Profile Image - aligned with "little background" */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="md:col-span-4 relative aspect-[3/4] w-full max-w-sm mx-auto md:max-w-none rounded-2xl overflow-hidden shadow-2xl transition-all duration-500"
+            className="md:col-span-4 relative w-full max-w-xs mx-auto md:max-w-none md:sticky md:top-24"
           >
-            <Image
-              src="/devika.jpeg"
-              alt="Devika Nekkalapu"
-              fill
-              className="object-cover"
-              priority
-            />
+            <div className="relative aspect-[3/4] w-full rounded-2xl overflow-hidden shadow-2xl">
+              <Image
+                src="/devika.jpeg"
+                alt="Devika Nekkalapu"
+                fill
+                className="object-cover object-top"
+                priority
+                sizes="(max-width: 768px) 100vw, 33vw"
+              />
+            </div>
           </motion.div>
 
           {/* Right Column: Bio Content */}
@@ -72,8 +75,10 @@ export function About() {
               <h4 className="text-sm font-mono-premium text-muted-foreground mb-4">CORE SKILLS</h4>
               <div className="flex flex-wrap gap-2">
                 {[
+                  'RAG', 'LangChain', 'LangGraph', 'LlamaIndex', 'RAGAS', 'Agentic AI Workflows', 'Prompt Engineering',
+                  'QLoRA', 'LoRA', 'PEFT', 'Instruction Tuning', 'Embeddings', 'Hybrid Search (BM25 + Vector)', 'HNSW', 'Hugging Face Transformers',
                   'Python', 'SQL', 'Scikit-learn', 'PyTorch', 'TensorFlow', 'XGBoost', 'Random Forest', 'K-Means',
-                  'Deep Learning', 'LLMs', 'Hugging Face', 'RAG', 'LangChain', 'LangGraph', 'QLoRA', 'LoRA', 'PEFT',
+                  'Deep Learning', 'LLMs',
                   'FastAPI', 'REST APIs', 'Next.js', 'React', 'TypeScript', 'Node.js',
                   'AWS', 'S3', 'ECS', 'EKS', 'EC2', 'SageMaker', 'RDS', 'Aurora', 'DynamoDB', 'Lambda', 'SQS', 'API Gateway', 'IAM', 'CloudWatch',
                   'GCP', 'Vertex AI', 'BigQuery', 'GKE', 'Cloud Run', 'Cloud Storage', 'Pub/Sub', 'Cloud Monitoring',
