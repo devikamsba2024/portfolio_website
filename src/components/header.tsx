@@ -1,7 +1,7 @@
 "use client"
 
 import Link from 'next/link'
-import { Github, Linkedin, Mail, Twitter } from 'lucide-react'
+import { Github, Linkedin } from 'lucide-react'
 import { ThemeToggle } from './theme-toggle'
 import { Button } from './ui/button'
 
@@ -15,9 +15,6 @@ export function Header() {
           </Link>
           <Link href="https://www.linkedin.com/in/ndevika/" target="_blank" className="hover:text-gray-400 transition-colors">
             <Linkedin className="w-5 h-5" />
-          </Link>
-          <Link href="mailto:devika@example.com" className="hover:text-gray-400 transition-colors">
-            <Mail className="w-5 h-5" />
           </Link>
         </div>
 
