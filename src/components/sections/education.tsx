@@ -12,7 +12,7 @@ const education = [
     track: "Data Science Track",
     school: "Wichita State University",
     location: "Wichita, KS",
-    period: "Jan 2024 - Dec 2025",
+    period: "2024 - 2025",
     gpa: "Grade: 3.92",
     status: "Completed"
   },
@@ -21,7 +21,7 @@ const education = [
     degree: "Bachelor of Technology, Information Technology",
     school: "Gudlavalleru Engineering College, Seshadri Rao Knowledge Village",
     location: "Gudlavalleru, India",
-    period: "Jun 2014 - May 2018",
+    period: "2014 - 2018",
     gpa: "Grade: 8.91",
     status: "Completed"
   }
