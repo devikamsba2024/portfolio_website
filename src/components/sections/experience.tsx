@@ -24,7 +24,7 @@ const experiences = [
   },
   {
     id: "2",
-    title: "Senior Machine Learning Engineer",
+    title: "Software Engineer",
     company: "Torry Harris Integration Solutions",
     location: "Bengaluru, Karnataka, India",
     period: "10/2022 - 01/2024",
@@ -53,7 +53,7 @@ const experiences = [
   },
   {
     id: "5",
-    title: "Data Scientist",
+    title: "Project Engineer",
     company: "Wipro",
     location: "Bengaluru, Karnataka, India",
     period: "06/2018 - 02/2020",
